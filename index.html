@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoldbyHuse - Kvalitetsbyggeri til Aarhus' laveste pris</title>
+    <style>
+        :root {
+            --primary: #1a5490;
+            --secondary: #1877f2;
+            --accent: #42b72a;
+            --dark: #1c1e21;
+            --light: #f0f2f5;
+            --text: #050505;
+            --text-secondary: #65676b;
+            --success: #00a400;
+            --warning: #ff9800;
+            --error: #f02849;
+            --shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .contact-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            position: relative;
+            height: 90vh;
+            min-height: 600px;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23e8ecf1" width="1200" height="600"/><path fill="%23c5d1e0" d="M0 300L50 325L100 300L150 275L200 300L250 325L300 300L350 275L400 300L450 325L500 300L550 275L600 300L650 325L700 300L750 275L800 300L850 325L900 300L950 275L1000 300L1050 325L1100 300L1150 275L1200 300V600H0V300Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 800;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .hero-location {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: #166fe5;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(24, 119, 242, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+
+        /* Site Plan Section */
+        .site-plan {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .plan-container {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .plan-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .unit {
+            background: white;
+            border: 2px solid #e4e6eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .unit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--success);
+        }
+
+        .unit.rented::before {
+            background: var(--error);
+        }
+
+        .unit.sold::before {
+            background: var(--text-secondary);
+        }
+
+        .unit:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary);
+        }
+
+        .unit-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .unit-status {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .unit.available .unit-status {
+            background: #e7f3ff;
+            color: var(--secondary);
+        }
+
+        .unit.rented .unit-status {
+            background: #ffebe9;
+            color: var(--error);
+        }
+
+        .unit.sold .unit-status {
+            background: #e4e6eb;
+            color: var(--text-secondary);
+        }
+
+        .unit-type {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.available {
+            background: var(--success);
+        }
+
+        .legend-dot.rented {
+            background: var(--error);
+        }
+
+        .legend-dot.sold {
+            background: var(--text-secondary);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 5rem 2rem;
+            background: var(--light);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: white;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-secondary);
+            gap: 1rem;
+        }
+
+        .gallery-icon {
+            font-size: 3rem;
+            opacity: 0.5;
+        }
+
+        .gallery-label {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Info Section */
+        .info {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            padding: 2rem;
+            border-radius: 16px;
+            background: var(--light);
+            transition: transform 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--dark) 0%, #2d3436 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: rgba(24, 119, 242, 0.1);
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-method {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-method h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-method a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #166fe5;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(24, 119, 242, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border: none;
+            z-index: 10;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                height: auto;
+                min-height: 70vh;
+                padding: 6rem 1rem 4rem;
+            }
+
+            .plan-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 2rem;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, .3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 3000;
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">F</div>
+                <span>FoldbyHuse</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#hjem">Hjem</a></li>
+                <li><a href="#boliger">Ledige Boliger</a></li>
+                <li><a href="#galleri">Galleri</a></li>
+                <li><a href="#om">Om Os</a></li>
+                <li><a href="#kontakt" class="contact-btn">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hjem">
+        <div class="hero-content">
+            <div class="hero-location">
+                <span>📍</span>
+                <span>Foldby, 8382, Danmark (tæt på Aarhus)</span>
+            </div>
+            <h1>Kvalitetsbyggeri til Aarhus' laveste pris</h1>
+            <p class="hero-subtitle">Moderne rækkehuse i Foldby med plads til hele familien. 16 kvalitetsboliger tæt på
+                naturen og byen.</p>
+            <div class="cta-buttons">
+                <a href="#boliger" class="btn-primary">
+                    Se ledige boliger
+                    <span>→</span>
+                </a>
+                <a href="#kontakt" class="btn-secondary">Kontakt os</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Site Plan Section -->
+    <section class="site-plan" id="boliger">
+        <div class="container">
+            <div class="section-header">
+                <h2>Oversigt over boliger</h2>
+                <p>Klik på en bolig for at se detaljer og kontakte os ved interesse</p>
+            </div>
+
+            <div class="plan-container">
+                <div class="plan-grid" id="unitGrid">
+                    <!-- Units generated by JavaScript -->
+                </div>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-dot available"></div>
+                        <span>Ledig</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot rented"></div>
+                        <span>Udlejet</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot sold"></div>
+                        <span>Solgt</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="galleri">
+        <div class="container">
+            <div class="section-header">
+                <h2>Indendørs & Udendørs</h2>
+                <p>Se billeder fra vores moderne boliger med kvalitetsmaterialer</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('bathroom')">
+                    <div class="gallery-placeholder">
+                        <div class="gallery-icon">🚿</div>
+                        <div class="gallery-label">Badeværelse</div>
+                        <small>Moderne med gulvvarme</small>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal('utility')">
+                    <div class="gallery-placeholder">
+                        <div class="gallery-icon">🧺</div>
+                        <div class="gallery-label">Bryggers</div>
+                        <small>Praktisk vaskerum med udgang</small>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openModal('exterior')">
+                    <div class="gallery-placeholder">
+                        <div class="gallery-icon">🏠</div>
+                        <div class="gallery-label">Udendørs</div>
+                        <small>Velholdt have og terrasse</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info" id="om">
+        <div class="container">
+            <div class="section-header">
+                <h2>Hvorfor vælge FoldbyHuse?</h2>
+                <p>Vi tilbyder kvalitetsboliger i et attraktivt område</p>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">💰</div>
+                    <h3>Attraktiv pris</h3>
+                    <p>Aarhus' laveste priser for nybyggeri af denne kvalitet. Få mere bolig for pengene uden at gå på
+                        kompromis med kvaliteten.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🏗️</div>
+                    <h3>Kvalitetsbyggeri</h3>
+                    <p>Moderne rækkehuse bygget med de bedste materialer. Energirigtige løsninger der sparer dig penge
+                        på varmeregningen.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🌳</div>
+                    <h3>God beliggenhed</h3>
+                    <p>Foldby tilbyder det bedste fra begge verdener: Landlig idyl tæt på Aarhus. Grønne omgivelser med
+                        kort afstand til byen.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">📅</div>
+                    <h3>Erfaring</h3>
+                    <p>16 færdigbyggede huse siden 2015. Vi har styr på processen og sørger for en tryg overtagelse af
+                        din nye bolig.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="kontakt">
+        <div class="contact-container">
+            <h2>Kontakt os</h2>
+            <p class="contact-subtitle">Er du interesseret i en bolig? Kontakt os for en fremvisning.</p>
+
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <div class="contact-icon">📞</div>
+                    <h3>Telefon</h3>
+                    <a href="tel:21468065">21 46 80 65</a>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8;">Hverdage 9-17</p>
+                </div>
+                <div class="contact-method">
+                    <div class="contact-icon">📍</div>
+                    <h3>Adresse</h3>
+                    <p>Gammelager, Foldby<br>8382 Danmark</p>
+                </div>
+                <div class="contact-method">
+                    <div class="contact-icon">🌐</div>
+                    <h3>Hjemmeside</h3>
+                    <a href="https://foldbyhuse.dk" target="_blank">foldbyhuse.dk</a>
+                </div>
+            </div>
+
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Navn</label>
+                        <input type="text" placeholder="Dit fulde navn" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <input type="tel" placeholder="Dit telefonnummer" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="din@email.dk" required>
+                </div>
+                <div class="form-group">
+                    <label>Besked</label>
+                    <textarea rows="4" placeholder="Jeg er interesseret i bolig nr..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Send besked
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 FoldbyHuse. Alle rettigheder forbeholdes.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Bygherre: FoldbyHuse | Gammelager, Foldby, 8382 Danmark</p>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span>✓</span>
+        <span>Beskeden er sendt! Vi kontakter dig snarest.</span>
+    </div>
+
+    <script>
+        // Unit Data based on the site plan
+        const units = [
+            { id: 1, status: 'sold', type: 'Rækkehus', size: '105 m²' },
+            { id: 2, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 3, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 4, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 5, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 6, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 7, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 8, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 9, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 10, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 11, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 12, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 13, status: 'available', type: 'Rækkehus', size: '105 m²' },
+            { id: 14, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 15, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 16, status: 'sold', type: 'Rækkehus', size: '105 m²' }
+        ];
+
+        const statusLabels = {
+            available: { text: 'Ledig', class: 'available' },
+            rented: { text: 'Udlejet', class: 'rented' },
+            sold: { text: 'Solgt', class: 'sold' }
+        };
+
+        // Render Units
+        function renderUnits() {
+            const grid = document.getElementById('unitGrid');
+            grid.innerHTML = units.map(unit => `
+                <div class="unit ${unit.status}" onclick="openUnitModal(${unit.id})">
+                    <div class="unit-number">Hus ${unit.id}</div>
+                    <div class="unit-status">${statusLabels[unit.status].text}</div>
+                    <div class="unit-type">${unit.type} • ${unit.size}</div>
+                </div>
+            `).join('');
+        }
+
+        // Modal Functions
+        function openModal(type) {
+            const modal = document.getElementById('modal');
+            const body = document.getElementById('modalBody');
+            const titles = {
+                bathroom: 'Badeværelse',
+                utility: 'Bryggers',
+                exterior: 'Udendørs'
+            };
+
+            body.innerHTML = `
+                <h2 class="modal-title">${titles[type]}</h2>
+                <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); height: 400px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); flex-direction: column; gap: 1rem;">
+                    <div style="font-size: 4rem;">${type === 'bathroom' ? '🚿' : type === 'utility' ? '🧺' : '🏠'}</div>
+                    <p>Billede: ${titles[type]}</p>
+                </div>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">
+                    ${type === 'bathroom' ? 'Moderne badeværelse med gulvvarme, bruseniche og kvalitetsarmaturer. Hvide fliser og lyst interiør giver et rent og indbydende udtryk.' :
+                    type === 'utility' ? 'Praktisk bryggers med vaskemaskine, vask og god opbevaringsplads. Direkte udgang til terrasse og have.' :
+                        'Velholdt rødstens facade med sort tag. Egen have og terrasse med plads til grill og udemøbler.'}
+                </p>
+            `;
+            modal.classList.add('active');
+        }
+
+        function openUnitModal(id) {
+            const unit = units.find(u => u.id === id);
+            const modal = document.getElementById('modal');
+            const body = document.getElementById('modalBody');
+
+            body.innerHTML = `
+                <h2 class="modal-title">Hus ${unit.id} - ${unit.type}</h2>
+                <div style="display: grid; gap: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; padding: 1rem; background: var(--light); border-radius: 8px;">
+                        <span>Status:</span>
+                        <strong style="color: ${unit.status === 'available' ? 'var(--success)' : unit.status === 'rented' ? 'var(--error)' : 'var(--text-secondary)'}">${statusLabels[unit.status].text}</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 1rem; background: var(--light); border-radius: 8px;">
+                        <span>Størrelse:</span>
+                        <strong>${unit.size}</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 1rem; background: var(--light); border-radius: 8px;">
+                        <span>Adresse:</span>
+                        <strong>Gammelager ${unit.id}, 8382 Foldby</strong>
+                    </div>
+                    ${unit.status === 'available' ? `
+                        <button class="btn-primary" onclick="closeModal(); document.getElementById('kontakt').scrollIntoView({behavior: 'smooth'})" style="width:
