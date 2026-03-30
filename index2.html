@@ -263,100 +263,100 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .site-plan-container {
-            position: relative;
-            max-width: 1000px;
+        .site-plan-wrapper {
+            max-width: 900px;
             margin: 0 auto;
-            border-radius: 12px;
-            overflow: hidden;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
             box-shadow: var(--shadow-lg);
         }
 
-        .site-plan-image {
-            width: 100%;
-            height: auto;
-            display: block;
+        .site-plan-title {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
         }
 
-        .site-plan-overlay {
+        .houses-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .house-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .house-card::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+            right: 0;
+            height: 4px;
+            background: var(--error);
         }
 
-        .house-marker {
-            position: absolute;
-            pointer-events: auto;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s;
+        .house-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
-        .house-marker:hover {
-            transform: scale(1.1);
-        }
-
-        .house-marker .house-number {
-            background: rgba(255, 255, 255, 0.95);
+        .house-card-number {
+            font-size: 1.5rem;
+            font-weight: 800;
             color: var(--dark);
-            font-weight: 700;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-bottom: 2px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0.5rem;
         }
 
-        .house-marker .house-status {
+        .house-card-status {
+            display: inline-block;
             background: var(--error);
             color: white;
+            font-size: 0.75rem;
             font-weight: 700;
-            font-size: 0.65rem;
-            padding: 2px 6px;
-            border-radius: 4px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            margin-bottom: 0.5rem;
         }
 
-        /* House positions - left column (Hus 1-4) - aligned vertically */
-        .house-1 { top: 15%; left: 38%; }
-        .house-2 { top: 28%; left: 38%; }
-        .house-3 { top: 41%; left: 38%; }
-        .house-4 { top: 54%; left: 38%; }
+        .house-card-address {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
 
-        /* House positions - middle-left column (Hus 5-8) */
-        .house-5 { top: 15%; left: 48%; }
-        .house-6 { top: 28%; left: 48%; }
-        .house-7 { top: 41%; left: 48%; }
-        .house-8 { top: 54%; left: 48%; }
-
-        /* House positions - middle-right column (Hus 9-12) */
-        .house-9 { top: 21%; left: 58%; }
-        .house-10 { top: 34%; left: 58%; }
-        .house-11 { top: 47%; left: 58%; }
-        .house-12 { top: 60%; left: 58%; }
-
-        /* House positions - lower area (Hus 13-16) */
-        .house-13 { top: 67%; left: 48%; }
-        .house-14 { top: 75%; left: 48%; }
-        .house-15 { top: 67%; left: 58%; }
-        .house-16 { top: 75%; left: 58%; }
+        .site-plan-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #dee2e6;
+        }
 
         @media (max-width: 768px) {
-            .house-marker .house-number {
-                font-size: 0.55rem;
-                padding: 1px 3px;
+            .houses-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
             }
-            .house-marker .house-status {
-                font-size: 0.5rem;
-                padding: 1px 3px;
+            .house-card {
+                padding: 1rem 0.75rem;
+            }
+            .house-card-number {
+                font-size: 1.2rem;
             }
         }
 
@@ -996,17 +996,16 @@
                 <p>Klik på en bolig for at se detaljer og kontakte os ved interesse</p>
             </div>
 
-            <div class="site-plan-container">
-                <img src="images/site-plan-01.jpg" alt="Site plan med boligerne" class="site-plan-image">
-                <div class="site-plan-overlay" id="sitePlanOverlay">
-                    <!-- Markers generated by JavaScript -->
+            <div class="site-plan-wrapper">
+                <div class="site-plan-title">Oversigt over FoldbyHuse</div>
+                <div class="houses-grid" id="housesGrid">
+                    <!-- Houses generated by JavaScript -->
                 </div>
-            </div>
-
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="legend-dot rented"></div>
-                    <span>Udlejet</span>
+                <div class="site-plan-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot rented"></div>
+                        <span>Udlejet</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1296,11 +1295,12 @@
         };
 
         function renderUnits() {
-            const overlay = document.getElementById('sitePlanOverlay');
-            overlay.innerHTML = units.map(unit => `
-                <div class="house-marker house-${unit.id}" onclick="openUnitModal(${unit.id})">
-                    <div class="house-number">${unit.id}</div>
-                    <div class="house-status">${statusLabels[unit.status].text}</div>
+            const grid = document.getElementById('housesGrid');
+            grid.innerHTML = units.map(unit => `
+                <div class="house-card" onclick="openUnitModal(${unit.id})">
+                    <div class="house-card-number">Hus ${unit.id}</div>
+                    <div class="house-card-status">${statusLabels[unit.status].text}</div>
+                    <div class="house-card-address">Gammelager ${unit.id}</div>
                 </div>
             `).join('');
         }
