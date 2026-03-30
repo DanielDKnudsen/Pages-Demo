@@ -128,7 +128,7 @@
             position: relative;
             height: 90vh;
             min-height: 600px;
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23e8ecf1" width="1200" height="600"/><path fill="%23c5d1e0" d="M0 300L50 325L100 300L150 275L200 300L250 325L300 300L350 275L400 300L450 325L500 300L550 275L600 300L650 325L700 300L750 275L800 300L850 325L900 300L950 275L1000 300L1050 325L1100 300L1150 275L1200 300V600H0V300Z"/></svg>');
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=600&fit=crop');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -394,7 +394,7 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
@@ -407,33 +407,12 @@
             background: white;
             aspect-ratio: 4/3;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.3s;
         }
 
         .gallery-item:hover {
-            transform: scale(1.02);
-        }
-
-        .gallery-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: var(--text-secondary);
-            gap: 1rem;
-        }
-
-        .gallery-icon {
-            font-size: 3rem;
-            opacity: 0.5;
-        }
-
-        .gallery-label {
-            font-weight: 600;
-            font-size: 1.1rem;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
         .gallery-item img {
@@ -441,6 +420,135 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .gallery-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Photo Modal */
+        .photo-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .photo-modal.active {
+            display: flex;
+        }
+
+        .photo-modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .photo-modal img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .photo-modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .photo-modal-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .photo-modal-prev {
+            left: -70px;
+        }
+
+        .photo-modal-next {
+            right: -70px;
+        }
+
+        @media (max-width: 768px) {
+            .photo-modal-prev {
+                left: 10px;
+            }
+
+            .photo-modal-next {
+                right: 10px;
+            }
+        }
+
+        .photo-counter {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 0.9rem;
         }
 
         /* Info Section */
@@ -641,7 +749,7 @@
             font-size: 0.9rem;
         }
 
-        /* Modal */
+        /* Unit Modal */
         .modal {
             display: none;
             position: fixed;
@@ -661,7 +769,7 @@
         }
 
         .modal-content {
-            max-width: 1000px;
+            max-width: 600px;
             width: 100%;
             background: white;
             border-radius: 16px;
@@ -699,58 +807,7 @@
             color: var(--dark);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero {
-                height: auto;
-                min-height: 70vh;
-                padding: 6rem 1rem 4rem;
-            }
-
-            .plan-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                width: 100%;
-                padding: 0 2rem;
-            }
-
-            .btn-primary,
-            .btn-secondary {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, .3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Toast Notification */
+        /* Toast */
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -786,6 +843,46 @@
         .toast.success {
             border-left: 4px solid var(--success);
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                height: auto;
+                min-height: 70vh;
+                padding: 6rem 1rem 4rem;
+            }
+
+            .plan-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 2rem;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .photo-modal-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
 
@@ -801,7 +898,7 @@
             <ul class="nav-links">
                 <li><a href="#hjem">Hjem</a></li>
                 <li><a href="#boliger">Ledige Boliger</a></li>
-                <li><a href="#galleri">Galleri</a></li>
+                <li><a href="#galleri">Billeder</a></li>
                 <li><a href="#om">Om Os</a></li>
                 <li><a href="#kontakt" class="contact-btn">Kontakt</a></li>
             </ul>
@@ -859,39 +956,78 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
+    <!-- Gallery Section with Photos -->
     <section class="gallery" id="galleri">
         <div class="container">
             <div class="section-header">
-                <h2>Indendørs & Udendørs</h2>
-                <p>Se billeder fra vores moderne boliger med kvalitetsmaterialer</p>
+                <h2>Billeder fra FoldbyHuse</h2>
+                <p>Se vores moderne boliger med kvalitetsmaterialer og godt håndværk</p>
             </div>
 
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openModal('exterior-aerial-01')">
+                <div class="gallery-item" onclick="openPhotoModal(0)">
                     <img src="images/exterior-aerial-01.jpg" alt="Luftfoto af boligerne">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Luftfoto af boligerne</div>
+                        <div class="gallery-desc">Oversigt over de 16 rækkehuse</div>
+                    </div>
                 </div>
-                <div class="gallery-item" onclick="openModal('exterior-front-01')">
+                <div class="gallery-item" onclick="openPhotoModal(1)">
                     <img src="images/exterior-front-01.jpg" alt="Facaden">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Facaden</div>
+                        <div class="gallery-desc">Røde mursten og hvide vinduer</div>
+                    </div>
                 </div>
-                <div class="gallery-item" onclick="openModal('living-room-01')">
+                <div class="gallery-item" onclick="openPhotoModal(2)">
                     <img src="images/living-room-01.jpg" alt="Stue">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Stue</div>
+                        <div class="gallery-desc">Rummelig stue med plads til familien</div>
+                    </div>
                 </div>
-                <div class="gallery-item" onclick="openModal('kitchen-01')">
+                <div class="gallery-item" onclick="openPhotoModal(3)">
                     <img src="images/kitchen-01.jpg" alt="Køkken">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Køkken</div>
+                        <div class="gallery-desc">Moderne køkken med alle hårde hvidevarer</div>
+                    </div>
                 </div>
-                <div class="gallery-item" onclick="openModal('bedroom-master-01')">
+                <div class="gallery-item" onclick="openPhotoModal(4)">
                     <img src="images/bedroom-master-01.jpg" alt="Soveværelse">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Soveværelse</div>
+                        <div class="gallery-desc">Lyst værelse med god skabsplads</div>
+                    </div>
                 </div>
-                <div class="gallery-item" onclick="openModal('bathroom-01')">
+                <div class="gallery-item" onclick="openPhotoModal(5)">
                     <img src="images/bathroom-01.jpg" alt="Badeværelse">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Badeværelse</div>
+                        <div class="gallery-desc">Moderne med gulvvarme</div>
+                    </div>
                 </div>
-                <div class="gallery-item" onclick="openModal('dining-area-01')">
+                <div class="gallery-item" onclick="openPhotoModal(6)">
                     <img src="images/dining-area-01.jpg" alt="Spisestue">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Spisestue</div>
+                        <div class="gallery-desc">Åben forbindelse til køkken</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Photo Modal/Lightbox -->
+    <div class="photo-modal" id="photoModal">
+        <button class="photo-modal-close" onclick="closePhotoModal()">×</button>
+        <button class="photo-modal-nav photo-modal-prev" onclick="changePhoto(-1)">‹</button>
+        <div class="photo-modal-content">
+            <img id="modalImage" src="" alt="">
+            <div class="photo-counter" id="photoCounter">1 / 4</div>
+        </div>
+        <button class="photo-modal-nav photo-modal-next" onclick="changePhoto(1)">›</button>
+    </div>
 
     <!-- Info Section -->
     <section class="info" id="om">
@@ -987,13 +1123,11 @@
         <p style="margin-top: 0.5rem; font-size: 0.8rem;">Bygherre: FoldbyHuse | Gammelager, Foldby, 8382 Danmark</p>
     </footer>
 
-    <!-- Modal -->
-    <div class="modal" id="modal">
+    <!-- Unit Modal -->
+    <div class="modal" id="unitModal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            <div class="modal-body" id="modalBody">
-                <!-- Dynamic content -->
-            </div>
+            <button class="modal-close" onclick="closeUnitModal()">×</button>
+            <div class="modal-body" id="unitModalBody"></div>
         </div>
     </div>
 
@@ -1004,7 +1138,82 @@
     </div>
 
     <script>
-        // Unit Data based on the site plan
+        // Photo Gallery Data - Local images
+        const photos = [
+            {
+                src: 'images/exterior-aerial-01.jpg',
+                title: 'Luftfoto af boligerne',
+                desc: 'Oversigt over de 16 rækkehuse i Foldby'
+            },
+            {
+                src: 'images/exterior-front-01.jpg',
+                title: 'Facaden',
+                desc: 'Røde mursten og hvide vinduer'
+            },
+            {
+                src: 'images/living-room-01.jpg',
+                title: 'Stue',
+                desc: 'Rummelig stue med plads til hele familien'
+            },
+            {
+                src: 'images/kitchen-01.jpg',
+                title: 'Køkken',
+                desc: 'Moderne køkken med alle hårde hvidevarer'
+            },
+            {
+                src: 'images/bedroom-master-01.jpg',
+                title: 'Soveværelse',
+                desc: 'Lyst soveværelse med god skabsplads'
+            },
+            {
+                src: 'images/bathroom-01.jpg',
+                title: 'Badeværelse',
+                desc: 'Moderne badeværelse med gulvvarme'
+            },
+            {
+                src: 'images/dining-area-01.jpg',
+                title: 'Spisestue',
+                desc: 'Åben spisestue med udgang til terrasse'
+            }
+        ];
+
+        let currentPhotoIndex = 0;
+
+        function openPhotoModal(index) {
+            currentPhotoIndex = index;
+            updatePhotoModal();
+            document.getElementById('photoModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePhotoModal() {
+            document.getElementById('photoModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updatePhotoModal() {
+            const photo = photos[currentPhotoIndex];
+            document.getElementById('modalImage').src = photo.src;
+            document.getElementById('modalImage').alt = photo.title;
+            document.getElementById('photoCounter').textContent = `${currentPhotoIndex + 1} / ${photos.length}`;
+        }
+
+        function changePhoto(direction) {
+            currentPhotoIndex += direction;
+            if (currentPhotoIndex < 0) currentPhotoIndex = photos.length - 1;
+            if (currentPhotoIndex >= photos.length) currentPhotoIndex = 0;
+            updatePhotoModal();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('photoModal').classList.contains('active')) return;
+            if (e.key === 'Escape') closePhotoModal();
+            if (e.key === 'ArrowLeft') changePhoto(-1);
+            if (e.key === 'ArrowRight') changePhoto(1);
+        });
+
+        // Unit Data
         const units = [
             { id: 1, status: 'sold', type: 'Rækkehus', size: '105 m²' },
             { id: 2, status: 'rented', type: 'Rækkehus', size: '105 m²' },
@@ -1030,7 +1239,6 @@
             sold: { text: 'Solgt', class: 'sold' }
         };
 
-        // Render Units
         function renderUnits() {
             const grid = document.getElementById('unitGrid');
             grid.innerHTML = units.map(unit => `
@@ -1042,40 +1250,10 @@
             `).join('');
         }
 
-        // Modal Functions
-        function openModal(type) {
-            const modal = document.getElementById('modal');
-            const body = document.getElementById('modalBody');
-            const titles = {
-                'exterior-aerial-01': 'Luftfoto af boligerne',
-                'exterior-front-01': 'Facaden',
-                'living-room-01': 'Stue',
-                'kitchen-01': 'Køkken',
-                'bedroom-master-01': 'Soveværelse',
-                'bathroom-01': 'Badeværelse',
-                'dining-area-01': 'Spisestue'
-            };
-
-            body.innerHTML = `
-                <h2 class="modal-title">${titles[type]}</h2>
-                <img src="images/${type}.jpg" alt="${titles[type]}" style="width: 100%; border-radius: 12px;">
-                <p style="margin-top: 1rem; color: var(--text-secondary);">
-                    ${type === 'bathroom-01' ? 'Moderne badeværelse med gulvvarme, bruseniche og kvalitetsarmaturer.' :
-                    type === 'bedroom-master-01' ? 'Lyst og rummeligt soveværelse med god skabsplads.' :
-                    type === 'kitchen-01' ? 'Moderne køkken med induktionskomfur, opvaskemaskine og god arbejdsplads.' :
-                    type === 'living-room-01' ? 'Rummelig stue med plads til sofagruppe og spiseafdeling.' :
-                    type === 'dining-area-01' ? 'Åben spisestue i forbindelse med køkken og stue.' :
-                    type.startsWith('exterior') ? 'Velholdt rødstens facade med sort tag. Egen have og terrasse.' :
-                    'Moderne bolig med kvalitetsmaterialer.'}
-                </p>
-            `;
-            modal.classList.add('active');
-        }
-
         function openUnitModal(id) {
             const unit = units.find(u => u.id === id);
-            const modal = document.getElementById('modal');
-            const body = document.getElementById('modalBody');
+            const modal = document.getElementById('unitModal');
+            const body = document.getElementById('unitModalBody');
 
             body.innerHTML = `
                 <h2 class="modal-title">Hus ${unit.id} - ${unit.type}</h2>
@@ -1093,4 +1271,88 @@
                         <strong>Gammelager ${unit.id}, 8382 Foldby</strong>
                     </div>
                     ${unit.status === 'available' ? `
-                        <button class="btn-primary" onclick="closeModal(); document.getElementById('kontakt').scrollIntoView({behavior: 'smooth'})" style="width:
+                        <button class="btn-primary" onclick="closeUnitModal(); document.getElementById('kontakt').scrollIntoView({behavior: 'smooth'})" style="width: 100%; justify-content: center;">
+                            Kontakt os om denne bolig
+                        </button>
+                    ` : `
+                        <button disabled style="width: 100%; padding: 1rem; background: var(--light); border: 1px solid #ddd; border-radius: 8px; color: var(--text-secondary); cursor: not-allowed;">
+                            Denne bolig er ${unit.status === 'rented' ? 'udlejet' : 'solgt'}
+                        </button>
+                    `}
+                </div>
+            `;
+            modal.classList.add('active');
+        }
+
+        function closeUnitModal() {
+            document.getElementById('unitModal').classList.remove('active');
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerHTML;
+
+            btn.innerHTML = '<span class="loading"></span> Sender...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                document.getElementById('toast').classList.add('show');
+                e.target.reset();
+
+                setTimeout(() => {
+                    document.getElementById('toast').classList.remove('show');
+                }, 3000);
+            }, 1500);
+        }
+
+        // Close modals on outside click
+        document.getElementById('photoModal').addEventListener('click', function (e) {
+            if (e.target === this) closePhotoModal();
+        });
+
+        document.getElementById('unitModal').addEventListener('click', function (e) {
+            if (e.target === this) closeUnitModal();
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Initialize
+        renderUnits();
+
+        // Animate on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.unit, .info-card, .gallery-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
