@@ -263,93 +263,99 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .plan-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            max-width: 900px;
+        .site-plan-container {
+            position: relative;
+            max-width: 1000px;
             margin: 0 auto;
-            position: relative;
-        }
-
-        @media (max-width: 768px) {
-            .plan-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .unit {
-            background: white;
-            border: 2px solid #e4e6eb;
             border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-            position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-lg);
         }
 
-        .unit::before {
-            content: '';
+        .site-plan-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .site-plan-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: var(--success);
+            height: 100%;
+            pointer-events: none;
         }
 
-        .unit.rented::before {
-            background: var(--error);
+        .house-marker {
+            position: absolute;
+            pointer-events: auto;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
         }
 
-        .unit.sold::before {
-            background: var(--text-secondary);
+        .house-marker:hover {
+            transform: scale(1.1);
         }
 
-        .unit:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--secondary);
-        }
-
-        .unit-number {
-            font-size: 1.5rem;
-            font-weight: 800;
+        .house-marker .house-number {
+            background: rgba(255, 255, 255, 0.95);
             color: var(--dark);
-            margin-bottom: 0.5rem;
+            font-weight: 700;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-bottom: 2px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
         }
 
-        .unit-status {
-            font-size: 0.875rem;
-            font-weight: 600;
+        .house-marker .house-status {
+            background: var(--error);
+            color: white;
+            font-weight: 700;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 4px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            display: inline-block;
-            margin-bottom: 0.5rem;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
         }
 
-        .unit.available .unit-status {
-            background: #e7f3ff;
-            color: var(--secondary);
-        }
+        /* House positions - left column (Hus 1-4) */
+        .house-1 { top: 18%; left: 35%; }
+        .house-2 { top: 30%; left: 35%; }
+        .house-3 { top: 42%; left: 35%; }
+        .house-4 { top: 54%; left: 35%; }
 
-        .unit.rented .unit-status {
-            background: #ffebe9;
-            color: var(--error);
-        }
+        /* House positions - middle column (Hus 5-8, 13-16) */
+        .house-5 { top: 18%; left: 48%; }
+        .house-6 { top: 30%; left: 48%; }
+        .house-7 { top: 42%; left: 48%; }
+        .house-8 { top: 54%; left: 48%; }
+        .house-13 { top: 66%; left: 48%; }
+        .house-14 { top: 78%; left: 48%; }
 
-        .unit.sold .unit-status {
-            background: #e4e6eb;
-            color: var(--text-secondary);
-        }
+        /* House positions - right columns (Hus 9-12, 15-16) */
+        .house-9 { top: 24%; left: 60%; }
+        .house-10 { top: 36%; left: 60%; }
+        .house-11 { top: 48%; left: 60%; }
+        .house-12 { top: 60%; left: 60%; }
+        .house-15 { top: 72%; left: 60%; }
+        .house-16 { top: 84%; left: 60%; }
 
-        .unit-type {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+        @media (max-width: 768px) {
+            .house-marker .house-number {
+                font-size: 0.55rem;
+                padding: 1px 3px;
+            }
+            .house-marker .house-status {
+                font-size: 0.5rem;
+                padding: 1px 3px;
+            }
         }
 
         .legend {
@@ -988,24 +994,17 @@
                 <p>Klik på en bolig for at se detaljer og kontakte os ved interesse</p>
             </div>
 
-            <div class="plan-container">
-                <div class="plan-grid" id="unitGrid">
-                    <!-- Units generated by JavaScript -->
+            <div class="site-plan-container">
+                <img src="images/site-plan-01.jpg" alt="Site plan med boligerne" class="site-plan-image">
+                <div class="site-plan-overlay" id="sitePlanOverlay">
+                    <!-- Markers generated by JavaScript -->
                 </div>
+            </div>
 
-                <div class="legend">
-                    <div class="legend-item">
-                        <div class="legend-dot available"></div>
-                        <span>Ledig</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-dot rented"></div>
-                        <span>Udlejet</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-dot sold"></div>
-                        <span>Solgt</span>
-                    </div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-dot rented"></div>
+                    <span>Udlejet</span>
                 </div>
             </div>
         </div>
@@ -1268,9 +1267,9 @@
             if (e.key === 'ArrowRight') changePhoto(1);
         });
 
-        // Unit Data
+        // Unit Data - all rented now
         const units = [
-            { id: 1, status: 'sold', type: 'Rækkehus', size: '105 m²' },
+            { id: 1, status: 'rented', type: 'Rækkehus', size: '105 m²' },
             { id: 2, status: 'rented', type: 'Rækkehus', size: '105 m²' },
             { id: 3, status: 'rented', type: 'Rækkehus', size: '105 m²' },
             { id: 4, status: 'rented', type: 'Rækkehus', size: '105 m²' },
@@ -1282,10 +1281,10 @@
             { id: 10, status: 'rented', type: 'Rækkehus', size: '105 m²' },
             { id: 11, status: 'rented', type: 'Rækkehus', size: '105 m²' },
             { id: 12, status: 'rented', type: 'Rækkehus', size: '105 m²' },
-            { id: 13, status: 'available', type: 'Rækkehus', size: '105 m²' },
+            { id: 13, status: 'rented', type: 'Rækkehus', size: '105 m²' },
             { id: 14, status: 'rented', type: 'Rækkehus', size: '105 m²' },
             { id: 15, status: 'rented', type: 'Rækkehus', size: '105 m²' },
-            { id: 16, status: 'sold', type: 'Rækkehus', size: '105 m²' }
+            { id: 16, status: 'rented', type: 'Rækkehus', size: '105 m²' }
         ];
 
         const statusLabels = {
@@ -1295,12 +1294,11 @@
         };
 
         function renderUnits() {
-            const grid = document.getElementById('unitGrid');
-            grid.innerHTML = units.map(unit => `
-                <div class="unit ${unit.status}" onclick="openUnitModal(${unit.id})">
-                    <div class="unit-number">Hus ${unit.id}</div>
-                    <div class="unit-status">${statusLabels[unit.status].text}</div>
-                    <div class="unit-type">${unit.type} • ${unit.size}</div>
+            const overlay = document.getElementById('sitePlanOverlay');
+            overlay.innerHTML = units.map(unit => `
+                <div class="house-marker house-${unit.id}" onclick="openUnitModal(${unit.id})">
+                    <div class="house-number">${unit.id}</div>
+                    <div class="house-status">${statusLabels[unit.status].text}</div>
                 </div>
             `).join('');
         }
@@ -1315,7 +1313,7 @@
                 <div style="display: grid; gap: 1.5rem;">
                     <div style="display: flex; justify-content: space-between; padding: 1rem; background: var(--light); border-radius: 8px;">
                         <span>Status:</span>
-                        <strong style="color: ${unit.status === 'available' ? 'var(--success)' : unit.status === 'rented' ? 'var(--error)' : 'var(--text-secondary)'}">${statusLabels[unit.status].text}</strong>
+                        <strong style="color: var(--error)">${statusLabels[unit.status].text}</strong>
                     </div>
                     <div style="display: flex; justify-content: space-between; padding: 1rem; background: var(--light); border-radius: 8px;">
                         <span>Størrelse:</span>
@@ -1325,15 +1323,9 @@
                         <span>Adresse:</span>
                         <strong>Gammelager ${unit.id}, 8382 Foldby</strong>
                     </div>
-                    ${unit.status === 'available' ? `
-                        <button class="btn-primary" onclick="closeUnitModal(); document.getElementById('kontakt').scrollIntoView({behavior: 'smooth'})" style="width: 100%; justify-content: center;">
-                            Kontakt os om denne bolig
-                        </button>
-                    ` : `
-                        <button disabled style="width: 100%; padding: 1rem; background: var(--light); border: 1px solid #ddd; border-radius: 8px; color: var(--text-secondary); cursor: not-allowed;">
-                            Denne bolig er ${unit.status === 'rented' ? 'udlejet' : 'solgt'}
-                        </button>
-                    `}
+                    <button disabled style="width: 100%; padding: 1rem; background: var(--light); border: 1px solid #ddd; border-radius: 8px; color: var(--text-secondary); cursor: not-allowed;">
+                        Denne bolig er udlejet
+                    </button>
                 </div>
             `;
             modal.classList.add('active');
