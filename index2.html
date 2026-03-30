@@ -844,6 +844,52 @@
             border-left: 4px solid var(--success);
         }
 
+        /* Version Navigation */
+        .version-nav {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .version-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .version-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            margin-right: 0.25rem;
+        }
+
+        .version-btn {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .version-btn:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .version-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -887,6 +933,15 @@
 </head>
 
 <body>
+
+    <!-- Version Navigation -->
+    <div class="version-nav">
+        <div class="version-container">
+            <span class="version-label">Sammenlign versioner:</span>
+            <a href="index.html" class="version-btn">Version 1</a>
+            <a href="index2.html" class="version-btn active">Version 2</a>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav>

@@ -786,10 +786,65 @@
         .toast.success {
             border-left: 4px solid var(--success);
         }
+
+        /* Version Navigation */
+        .version-nav {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .version-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .version-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            margin-right: 0.25rem;
+        }
+
+        .version-btn {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .version-btn:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .version-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- Version Navigation -->
+    <div class="version-nav">
+        <div class="version-container">
+            <span class="version-label">Sammenlign versioner:</span>
+            <a href="index.html" class="version-btn active">Version 1</a>
+            <a href="index2.html" class="version-btn">Version 2</a>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav>
@@ -1062,11 +1117,11 @@
                 <p style="margin-top: 1rem; color: var(--text-secondary);">
                     ${type === 'bathroom-01' ? 'Moderne badeværelse med gulvvarme, bruseniche og kvalitetsarmaturer.' :
                     type === 'bedroom-master-01' ? 'Lyst og rummeligt soveværelse med god skabsplads.' :
-                    type === 'kitchen-01' ? 'Moderne køkken med induktionskomfur, opvaskemaskine og god arbejdsplads.' :
-                    type === 'living-room-01' ? 'Rummelig stue med plads til sofagruppe og spiseafdeling.' :
-                    type === 'dining-area-01' ? 'Åben spisestue i forbindelse med køkken og stue.' :
-                    type.startsWith('exterior') ? 'Velholdt rødstens facade med sort tag. Egen have og terrasse.' :
-                    'Moderne bolig med kvalitetsmaterialer.'}
+                        type === 'kitchen-01' ? 'Moderne køkken med induktionskomfur, opvaskemaskine og god arbejdsplads.' :
+                            type === 'living-room-01' ? 'Rummelig stue med plads til sofagruppe og spiseafdeling.' :
+                                type === 'dining-area-01' ? 'Åben spisestue i forbindelse med køkken og stue.' :
+                                    type.startsWith('exterior') ? 'Velholdt rødstens facade med sort tag. Egen have og terrasse.' :
+                                        'Moderne bolig med kvalitetsmaterialer.'}
                 </p>
             `;
             modal.classList.add('active');
@@ -1093,4 +1148,51 @@
                         <strong>Gammelager ${unit.id}, 8382 Foldby</strong>
                     </div>
                     ${unit.status === 'available' ? `
-                        <button class="btn-primary" onclick="closeModal(); document.getElementById('kontakt').scrollIntoView({behavior: 'smooth'})" style="width:
+                        <button class="btn-primary" onclick="closeModal(); document.getElementById('kontakt').scrollIntoView({behavior: 'smooth'})" style="width: 100%;">
+                            Kontakt os om denne bolig
+                        </button>
+                    ` : `
+                        <p style="text-align: center; color: var(--text-secondary); padding: 1rem;">
+                            Denne bolig er ${unit.status === 'rented' ? 'udlejet' : 'solgt'}. Kontakt os for at komme på venteliste.
+                        </p>
+                    `}
+                </div>
+            `;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const toast = document.getElementById('toast');
+
+            btn.innerHTML = '<span class="loading"></span> Sender...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = 'Send besked';
+                btn.disabled = false;
+                event.target.reset();
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 4000);
+            }, 1500);
+        }
+
+        // Close modal on outside click
+        document.getElementById('modal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Initialize
+        renderUnits();
+    </script>
+</body>
+
+</html>
