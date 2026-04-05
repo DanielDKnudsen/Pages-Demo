@@ -818,6 +818,17 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
+        /* Photo Modal */
+        .photo-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; align-items: center; justify-content: center; padding: 2rem; }
+        .photo-modal.active { display: flex; }
+        .photo-modal img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 12px; }
+        .photo-modal-close { position: absolute; top: 2rem; right: 2rem; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 1.5rem; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
+        .photo-modal-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; }
+        .photo-modal-nav:hover { background: rgba(255,255,255,0.2); }
+        .photo-prev { left: 2rem; }
+        .photo-next { right: 2rem; }
+        .photo-counter { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+
         /* Version Nav */
         .version-nav {
             position: fixed;
@@ -940,6 +951,9 @@
             <a href="index5.html" class="version-btn">V5</a>
             <a href="index6.html" class="version-btn active">V6</a>
             <a href="index7.html" class="version-btn">V7</a>
+            <a href="index8.html" class="version-btn">V8</a>
+            <a href="index9.html" class="version-btn">V9</a>
+            <a href="index10.html" class="version-btn">V10</a>
         </div>
     </div>
 
@@ -1211,7 +1225,26 @@
         <span>Beskeden er sendt!</span>
     </div>
 
+    <!-- Photo Modal -->
+    <div class="photo-modal" id="photoModal">
+        <button class="photo-modal-close" onclick="closePhotoModal()">×</button>
+        <button class="photo-modal-nav photo-prev" onclick="changePhoto(-1)">&#8249;</button>
+        <img id="modalPhoto" src="" alt="">
+        <button class="photo-modal-nav photo-next" onclick="changePhoto(1)">&#8250;</button>
+        <div class="photo-counter" id="photoCounter"></div>
+    </div>
+
     <script>
+        const photos = [
+            {src:'images/exterior-aerial-01.jpg',title:'Luftfoto af boligerne'},
+            {src:'images/exterior-front-01.jpg',title:'Facaden'},
+            {src:'images/living-room-01.jpg',title:'Stue'},
+            {src:'images/kitchen-01.jpg',title:'Køkken'},
+            {src:'images/bedroom-master-01.jpg',title:'Soveværelse'},
+            {src:'images/bathroom-01.jpg',title:'Badeværelse'}
+        ];
+        let currentPhoto = 0;
+
         const units = [
             { id: 1, status: 'rented', type: 'Rækkehus', size: '105 m²' },
             { id: 2, status: 'rented', type: 'Rækkehus', size: '105 m²' },
@@ -1274,8 +1307,16 @@
         }
 
         function openPhoto(index) {
-            const titles = ['Luftfoto af boligerne', 'Facaden', 'Stue', 'Køkken', 'Soveværelse', 'Badeværelse'];
-            alert(`Viser: ${titles[index]}\n\n(Klik OK for at lukke)`);
+            currentPhoto = index;
+            document.getElementById('modalPhoto').src = photos[index].src;
+            document.getElementById('photoCounter').textContent = `${index+1} / ${photos.length}`;
+            document.getElementById('photoModal').classList.add('active');
+        }
+        function closePhotoModal() { document.getElementById('photoModal').classList.remove('active'); }
+        function changePhoto(d) {
+            currentPhoto = (currentPhoto + d + photos.length) % photos.length;
+            document.getElementById('modalPhoto').src = photos[currentPhoto].src;
+            document.getElementById('photoCounter').textContent = `${currentPhoto+1} / ${photos.length}`;
         }
 
         function handleSubmit(e) {
@@ -1304,6 +1345,14 @@
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) target.scrollIntoView({ behavior: 'smooth' });
             });
+        });
+
+        document.getElementById('photoModal').addEventListener('click', function(e){ if(e.target===this) closePhotoModal(); });
+        document.addEventListener('keydown', e=>{
+            if(!document.getElementById('photoModal').classList.contains('active')) return;
+            if(e.key==='Escape') closePhotoModal();
+            if(e.key==='ArrowLeft') changePhoto(-1);
+            if(e.key==='ArrowRight') changePhoto(1);
         });
 
         renderUnits();
