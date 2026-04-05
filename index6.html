@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoldbyHuse - Kvalitetsbyggeri til Aarhus' laveste pris</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #faf9f8;
+            --bg-warm: #f5f2ef;
+            --text: #1a1a1a;
+            --text-secondary: #6b6b6b;
+            --text-light: #999999;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --warm: #c4723c;
+            --success: #22c55e;
+            --error: #ef4444;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.08);
+            --radius-sm: 8px;
+            --radius: 16px;
+            --radius-lg: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.2;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250, 249, 248, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-btn {
+            background: var(--text);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Hero - Full Width */
+        .hero {
+            padding-top: 120px;
+            padding-bottom: 0;
+            background: var(--bg-warm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            padding: 3rem 0;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-tag-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            color: var(--text);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hero-stats-row {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-image-overlay {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-image-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .hero-image-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .hero-image-text {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .hero-image-sub {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .hero-image-badge {
+            background: var(--warm);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Section Base */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Units - Card Grid */
+        .units {
+            background: white;
+        }
+
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .unit-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .unit-card:hover {
+            background: white;
+            box-shadow: var(--shadow-md);
+            border-color: rgba(0, 0, 0, 0.05);
+            transform: translateY(-4px);
+        }
+
+        .unit-card-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .unit-card-status {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.3rem 0.75rem;
+            border-radius: 100px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .unit-card-status.rented {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+        }
+
+        .unit-card-address {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .units-footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .units-legend {
+            display: inline-flex;
+            gap: 1.5rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.rented { background: var(--error); }
+        .legend-dot.available { background: var(--success); }
+
+        /* Gallery - Horizontal Scroll */
+        .gallery {
+            background: var(--bg-warm);
+            overflow: hidden;
+        }
+
+        .gallery-scroll {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 1rem 0 2rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .gallery-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-item {
+            flex: 0 0 350px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            scroll-snap-align: start;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.25rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            color: white;
+        }
+
+        .gallery-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .gallery-desc {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* Features - 2x2 Grid */
+        .features {
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            display: flex;
+            gap: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: white;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Contact - Split */
+        .contact {
+            background: var(--bg);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            padding-top: 1rem;
+        }
+
+        .contact-info h2 {
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info > p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .contact-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .contact-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateX(5px);
+        }
+
+        .contact-card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .contact-card-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-card-value {
+            font-weight: 600;
+        }
+
+        .contact-card-value a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .contact-card-value a:hover {
+            color: var(--accent);
+        }
+
+        .contact-form {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-light);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--text);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            max-width: 480px;
+            width: 100%;
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--bg);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--bg-warm);
+        }
+
+        .modal-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            margin-bottom: 0.75rem;
+        }
+
+        .modal-label {
+            color: var(--text-secondary);
+        }
+
+        .modal-value {
+            font-weight: 600;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--text);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 3000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .toast.show {
+            display: flex;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Version Nav */
+        .version-nav {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1001;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .version-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .version-label {
+            color: var(--text-light);
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+        }
+
+        .version-btn {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.35rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .version-btn:hover {
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        .version-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .units-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-stats-row {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+
+            .gallery-item {
+                flex: 0 0 280px;
+            }
+
+            .gallery-item img {
+                height: 220px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Version Navigation -->
+    <div class="version-nav">
+        <div class="version-container">
+            <span class="version-label">Versioner:</span>
+            <a href="index.html" class="version-btn">V1</a>
+            <a href="index2.html" class="version-btn">V2</a>
+            <a href="index3.html" class="version-btn">V3</a>
+            <a href="index4.html" class="version-btn">V4</a>
+            <a href="index5.html" class="version-btn">V5</a>
+            <a href="index6.html" class="version-btn active">V6</a>
+            <a href="index7.html" class="version-btn">V7</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">F</div>
+                <span>FoldbyHuse</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#hjem">Hjem</a></li>
+                <li><a href="#boliger">Boliger</a></li>
+                <li><a href="#galleri">Galleri</a></li>
+                <li><a href="#om">Om Os</a></li>
+            </ul>
+            <a href="#kontakt" class="nav-btn">Kontakt</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hjem">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="hero-tag">
+                    <span class="hero-tag-dot"></span>
+                    Kvalitetsbyggeri siden 2015
+                </div>
+                <h1>Kvalitetsbyggeri til Aarhus' laveste pris</h1>
+                <p class="hero-subtitle">Moderne rækkehuse i Foldby med plads til hele familien. 16 kvalitetsboliger bygget med omhu.</p>
+                
+                <div class="hero-actions">
+                    <a href="#boliger" class="btn-primary">
+                        Se Boliger
+                        <span>→</span>
+                    </a>
+                    <a href="#kontakt" class="btn-secondary">Kontakt Os</a>
+                </div>
+
+                <div class="hero-stats-row">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">16</div>
+                        <div class="hero-stat-label">Boliger</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">105m²</div>
+                        <div class="hero-stat-label">Per bolig</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">8382</div>
+                        <div class="hero-stat-label">Postnr.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-image-wrapper">
+                    <img src="images/exterior-aerial-01.jpg" alt="FoldbyHuse">
+                    <div class="hero-image-overlay">
+                        <div class="hero-image-info">
+                            <div class="hero-image-icon">◎</div>
+                            <div>
+                                <div class="hero-image-text">Foldby, Danmark</div>
+                                <div class="hero-image-sub">Nær Aarhus</div>
+                            </div>
+                        </div>
+                        <div class="hero-image-badge">Premium</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Units Section -->
+    <section class="units" id="boliger">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Oversigt</div>
+                <h2>Vores Boliger</h2>
+                <p>Alle 16 boliger er beliggende på Gammelager i Foldby.</p>
+            </div>
+
+            <div class="units-grid" id="housesGrid"></div>
+
+            <div class="units-footer">
+                <div class="units-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot rented"></div>
+                        <span>Udlejet</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="galleri">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Galleri</div>
+                <h2>Se Vores Boliger</h2>
+                <p>Billeder fra de moderne rækkehuse i Foldby.</p>
+            </div>
+        </div>
+
+        <div class="gallery-scroll">
+            <div class="gallery-item" onclick="openPhoto(0)">
+                <img src="images/exterior-aerial-01.jpg" alt="Luftfoto">
+                <div class="gallery-info">
+                    <div class="gallery-title">Luftfoto</div>
+                    <div class="gallery-desc">Oversigt over boligerne</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openPhoto(1)">
+                <img src="images/exterior-front-01.jpg" alt="Facade">
+                <div class="gallery-info">
+                    <div class="gallery-title">Facaden</div>
+                    <div class="gallery-desc">Røde mursten og hvide vinduer</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openPhoto(2)">
+                <img src="images/living-room-01.jpg" alt="Stue">
+                <div class="gallery-info">
+                    <div class="gallery-title">Stue</div>
+                    <div class="gallery-desc">Rummelig og lys</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openPhoto(3)">
+                <img src="images/kitchen-01.jpg" alt="Køkken">
+                <div class="gallery-info">
+                    <div class="gallery-title">Køkken</div>
+                    <div class="gallery-desc">Moderne med hvidevarer</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openPhoto(4)">
+                <img src="images/bedroom-master-01.jpg" alt="Soveværelse">
+                <div class="gallery-info">
+                    <div class="gallery-title">Soveværelse</div>
+                    <div class="gallery-desc">Lyst og rummeligt</div>
+                </div>
+            </div>
+            <div class="gallery-item" onclick="openPhoto(5)">
+                <img src="images/bathroom-01.jpg" alt="Badeværelse">
+                <div class="gallery-info">
+                    <div class="gallery-title">Badeværelse</div>
+                    <div class="gallery-desc">Moderne med gulvvarme</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="om">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Fordele</div>
+                <h2>Hvorfor Vælge FoldbyHuse?</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">★</div>
+                    <div class="feature-content">
+                        <h3>Attraktiv Pris</h3>
+                        <p>Aarhus' laveste priser for nybyggeri af denne kvalitet. Få mere bolig for pengene.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">◆</div>
+                    <div class="feature-content">
+                        <h3>Kvalitetsbyggeri</h3>
+                        <p>Moderne rækkehuse bygget med de bedste materialer. Energirigtige løsninger.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">●</div>
+                    <div class="feature-content">
+                        <h3>God Beliggenhed</h3>
+                        <p>Landlig idol tæt på Aarhus. Grønne omgivelser med kort afstand til byen.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">■</div>
+                    <div class="feature-content">
+                        <h3>Erfaring</h3>
+                        <p>16 færdigbyggede huse siden 2015. Vi har styr på processen.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="kontakt">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Skriv Til Os</h2>
+                    <p>Er du interesseret i en bolig? Kontakt os for en fremvisning.</p>
+
+                    <div class="contact-cards">
+                        <div class="contact-card">
+                            <div class="contact-card-icon">☎</div>
+                            <div>
+                                <div class="contact-card-label">Telefon</div>
+                                <div class="contact-card-value"><a href="tel:21468065">21 46 80 65</a></div>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-card-icon">✉</div>
+                            <div>
+                                <div class="contact-card-label">Email</div>
+                                <div class="contact-card-value"><a href="mailto:info@foldbyhuse.dk">info@foldbyhuse.dk</a></div>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-card-icon">◎</div>
+                            <div>
+                                <div class="contact-card-label">Adresse</div>
+                                <div class="contact-card-value">Gammelager, Foldby, 8382</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Navn</label>
+                            <input type="text" placeholder="Dit navn" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Telefon</label>
+                            <input type="tel" placeholder="Dit nummer" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="din@email.dk" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Besked</label>
+                        <textarea rows="4" placeholder="Jeg er interesseret i..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">Send Besked</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 FoldbyHuse. Alle rettigheder forbeholdes.</p>
+        <p>Gammelager, Foldby, 8382 Danmark</p>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="unitModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeUnitModal()">×</button>
+            <div class="modal-title" id="modalTitle">Hus 1</div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span>✓</span>
+        <span>Beskeden er sendt!</span>
+    </div>
+
+    <script>
+        const units = [
+            { id: 1, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 2, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 3, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 4, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 5, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 6, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 7, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 8, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 9, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 10, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 11, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 12, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 13, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 14, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 15, status: 'rented', type: 'Rækkehus', size: '105 m²' },
+            { id: 16, status: 'rented', type: 'Rækkehus', size: '105 m²' }
+        ];
+
+        function renderUnits() {
+            const grid = document.getElementById('housesGrid');
+            grid.innerHTML = units.map(unit => `
+                <div class="unit-card" onclick="openUnitModal(${unit.id})">
+                    <div class="unit-card-number">${unit.id}</div>
+                    <div class="unit-card-status ${unit.status}">${unit.status === 'rented' ? 'Udlejet' : 'Ledig'}</div>
+                    <div class="unit-card-address">Gammelager ${unit.id}</div>
+                </div>
+            `).join('');
+        }
+
+        function openUnitModal(id) {
+            const unit = units.find(u => u.id === id);
+            document.getElementById('modalTitle').textContent = `Hus ${unit.id}`;
+            document.getElementById('modalBody').innerHTML = `
+                <div class="modal-detail">
+                    <span class="modal-label">Type</span>
+                    <span class="modal-value">${unit.type}</span>
+                </div>
+                <div class="modal-detail">
+                    <span class="modal-label">Størrelse</span>
+                    <span class="modal-value">${unit.size}</span>
+                </div>
+                <div class="modal-detail">
+                    <span class="modal-label">Status</span>
+                    <span class="modal-value" style="color: var(--error)">${unit.status === 'rented' ? 'Udlejet' : 'Ledig'}</span>
+                </div>
+                <div class="modal-detail">
+                    <span class="modal-label">Adresse</span>
+                    <span class="modal-value">Gammelager ${unit.id}</span>
+                </div>
+                <p style="margin-top: 1.5rem; color: var(--text-secondary); text-align: center;">
+                    Denne bolig er udlejet. Kontakt os for at komme på venteliste.
+                </p>
+            `;
+            document.getElementById('unitModal').classList.add('active');
+        }
+
+        function closeUnitModal() {
+            document.getElementById('unitModal').classList.remove('active');
+        }
+
+        function openPhoto(index) {
+            const titles = ['Luftfoto af boligerne', 'Facaden', 'Stue', 'Køkken', 'Soveværelse', 'Badeværelse'];
+            alert(`Viser: ${titles[index]}\n\n(Klik OK for at lukke)`);
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.textContent = 'Sender...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.textContent = 'Send Besked';
+                btn.disabled = false;
+                e.target.reset();
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3000);
+            }, 1500);
+        }
+
+        document.getElementById('unitModal').addEventListener('click', function(e) {
+            if (e.target === this) closeUnitModal();
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        renderUnits();
+    </script>
+</body>
+
+</html>
