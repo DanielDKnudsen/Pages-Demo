@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOLDBYHUSE — Rækkehuse</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #000000; --white: #ffffff; --yellow: #ffdd00; --red: #ff0000;
+            --gray: #888888; --light-gray: #e0e0e0;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Courier New', monospace; background: var(--white); color: var(--black); line-height: 1.4; }
+
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--black); border-bottom: 4px solid var(--yellow); }
+        .nav-inner { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--white); text-decoration: none; letter-spacing: -0.05em; }
+        .logo span { color: var(--yellow); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--gray); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--yellow); }
+
+        .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; border-bottom: 4px solid var(--black); }
+        .hero-text { display: flex; flex-direction: column; justify-content: center; padding: 6rem 4rem; border-right: 4px solid var(--black); }
+        .hero-tag { display: inline-block; background: var(--yellow); color: var(--black); padding: 0.5rem 1rem; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 2rem; width: fit-content; }
+        .hero h1 { font-size: clamp(3rem, 7vw, 6rem); font-weight: 900; line-height: 0.9; letter-spacing: -0.04em; margin-bottom: 1.5rem; text-transform: uppercase; }
+        .hero h1 .hl { color: var(--yellow); -webkit-text-stroke: 2px var(--black); }
+        .hero p { font-size: 1rem; color: var(--gray); max-width: 400px; margin-bottom: 2.5rem; line-height: 1.6; }
+        .hero-img { position: relative; overflow: hidden; }
+        .hero-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.2); }
+        .hero-img::after { content: 'FOLDBY'; position: absolute; bottom: 2rem; right: 2rem; font-size: 5rem; font-weight: 900; color: rgba(255,255,255,0.1); letter-spacing: -0.05em; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; font-size: 0.85rem; font-weight: 900; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.2s; font-family: inherit; border: 3px solid var(--black); }
+        .btn-solid { background: var(--black); color: var(--white); }
+        .btn-solid:hover { background: var(--yellow); color: var(--black); }
+        .btn-outline { background: var(--white); color: var(--black); margin-left: 1rem; }
+        .btn-outline:hover { background: var(--black); color: var(--white); }
+
+        section { padding: 4rem 2rem; }
+        .inner { max-width: 1200px; margin: 0 auto; }
+        .tag { display: inline-block; background: var(--black); color: var(--white); padding: 0.3rem 0.8rem; font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem; }
+        .title { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+        .desc { color: var(--gray); margin-bottom: 3rem; font-size: 0.9rem; }
+
+        .units-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 4px solid var(--black); }
+        .unit-card { padding: 1.5rem; cursor: pointer; border-right: 2px solid var(--black); border-bottom: 2px solid var(--black); transition: all 0.2s; }
+        .unit-card:nth-child(4n) { border-right: none; }
+        .unit-card:hover { background: var(--yellow); }
+        .unit-card .num { font-size: 2.5rem; font-weight: 900; line-height: 1; margin-bottom: 0.5rem; }
+        .unit-card .addr { font-size: 0.75rem; color: var(--gray); }
+        .unit-card:hover .addr { color: var(--black); }
+        .unit-card .status { display: inline-block; font-size: 0.6rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.2rem 0.5rem; background: var(--red); color: var(--white); margin-top: 0.75rem; }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 4px solid var(--black); }
+        .gallery-item { aspect-ratio: 1; overflow: hidden; cursor: pointer; position: relative; border-right: 2px solid var(--black); border-bottom: 2px solid var(--black); }
+        .gallery-item:nth-child(3n) { border-right: none; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: all 0.3s; }
+        .gallery-item:hover img { filter: grayscale(0%); transform: scale(1.05); }
+        .gallery-item .label { position: absolute; top: 1rem; left: 1rem; background: var(--yellow); color: var(--black); padding: 0.3rem 0.6rem; font-size: 0.65rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0; transition: opacity 0.3s; }
+        .gallery-item:hover .label { opacity: 1; }
+
+        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 4px solid var(--black); }
+        .feature { padding: 2rem; border-right: 2px solid var(--black); transition: all 0.2s; }
+        .feature:last-child { border-right: none; }
+        .feature:hover { background: var(--black); color: var(--white); }
+        .feature .num { font-size: 3rem; font-weight: 900; color: var(--yellow); margin-bottom: 0.5rem; line-height: 1; }
+        .feature h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .feature p { font-size: 0.8rem; color: var(--gray); }
+        .feature:hover p { color: var(--gray); }
+
+        .contact-section { background: var(--black); color: var(--white); border-top: 4px solid var(--yellow); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+        .contact-item { display: flex; gap: 1rem; align-items: center; padding: 1rem; border: 2px solid rgba(255,255,255,0.1); }
+        .contact-item:hover { border-color: var(--yellow); }
+        .contact-item .ico { width: 40px; height: 40px; background: var(--yellow); color: var(--black); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.1rem; }
+        .contact-item a { color: var(--white); text-decoration: none; font-weight: 700; }
+        .contact-item a:hover { color: var(--yellow); }
+        .contact-item small { color: var(--gray); font-size: 0.7rem; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; font-size: 0.7rem; margin-bottom: 0.4rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.85rem; background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); color: var(--white); font-size: 0.95rem; font-family: inherit; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--yellow); }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .submit-btn { width: 100%; padding: 1rem; background: var(--yellow); color: var(--black); border: none; font-weight: 900; cursor: pointer; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; font-family: inherit; }
+        .submit-btn:hover { background: var(--white); }
+
+        footer { background: var(--black); color: var(--gray); text-align: center; padding: 2rem; font-size: 0.75rem; border-top: 2px solid rgba(255,255,255,0.05); }
+
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center; padding: 2rem; }
+        .modal.active { display: flex; }
+        .modal-content { background: var(--white); border: 4px solid var(--black); max-width: 480px; width: 100%; padding: 2rem; position: relative; }
+        .modal-close { position: absolute; top: 0.5rem; right: 0.75rem; background: none; border: none; font-size: 2rem; cursor: pointer; font-weight: 900; }
+        .modal-close:hover { color: var(--red); }
+        .modal-title { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .modal-row { display: flex; justify-content: space-between; padding: 0.75rem; background: var(--light-gray); margin-bottom: 0.5rem; font-weight: 700; font-size: 0.85rem; }
+
+        .photo-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; padding: 2rem; }
+        .photo-modal.active { display: flex; }
+        .photo-modal img { max-width: 90vw; max-height: 85vh; object-fit: contain; border: 4px solid var(--white); }
+        .photo-modal-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; color: white; font-size: 2.5rem; cursor: pointer; font-weight: 900; }
+        .photo-modal-nav { position: absolute; top: 50%; transform: translateY(-50%); background: var(--yellow); border: none; color: var(--black); width: 50px; height: 50px; cursor: pointer; font-size: 1.5rem; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+        .photo-prev { left: 2rem; }
+        .photo-next { right: 2rem; }
+        .photo-counter { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: var(--yellow); font-size: 0.85rem; font-weight: 900; letter-spacing: 0.1em; }
+
+        .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--yellow); color: var(--black); padding: 1rem 1.5rem; display: none; align-items: center; gap: 0.75rem; z-index: 3000; font-weight: 900; font-size: 0.85rem; text-transform: uppercase; border: 3px solid var(--black); }
+        .toast.show { display: flex; }
+
+        .version-nav { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 1001; background: var(--black); border: 3px solid var(--yellow); padding: 0.5rem 1rem; }
+        .version-container { display: flex; align-items: center; gap: 0.5rem; }
+        .version-label { color: var(--yellow); font-size: 0.65rem; margin-right: 0.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; }
+        .version-btn { color: var(--gray); text-decoration: none; padding: 0.3rem 0.5rem; font-size: 0.65rem; font-weight: 900; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.05em; }
+        .version-btn:hover { color: var(--white); }
+        .version-btn.active { color: var(--black); background: var(--yellow); }
+
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-img { display: none; }
+            .hero-text { border-right: none; border-bottom: 4px solid var(--black); padding: 8rem 2rem 4rem; }
+            .units-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .feature:nth-child(2) { border-right: none; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .feature { border-right: none !important; border-bottom: 2px solid var(--black); }
+            .feature:last-child { border-bottom: none; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="version-nav">
+        <div class="version-container">
+            <span class="version-label">Versioner:</span>
+            <a href="index.html" class="version-btn">V1</a>
+            <a href="index2.html" class="version-btn">V2</a>
+            <a href="index3.html" class="version-btn">V3</a>
+            <a href="index4.html" class="version-btn">V4</a>
+            <a href="index5.html" class="version-btn">V5</a>
+            <a href="index6.html" class="version-btn">V6</a>
+            <a href="index7.html" class="version-btn">V7</a>
+            <a href="index8.html" class="version-btn">V8</a>
+            <a href="index9.html" class="version-btn active">V9</a>
+            <a href="index10.html" class="version-btn">V10</a>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">FOLD<span>BY</span>HUSE</a>
+            <ul class="nav-links">
+                <li><a href="#hjem">Hjem</a></li>
+                <li><a href="#boliger">Boliger</a></li>
+                <li><a href="#galleri">Galleri</a></li>
+                <li><a href="#om">Om</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="hjem">
+        <div class="hero-text">
+            <div class="hero-tag">/// 16 Rækkehuse i Foldby</div>
+            <h1>Kvalitets-<br>byggeri til<br><span class="hl">Aarhus'</span><br>laveste pris</h1>
+            <p>Gammelager, 8382 Foldby. 105 m² per bolig. Bygget 2015. Alle udlejet.</p>
+            <div>
+                <a href="#boliger" class="btn btn-solid">SE BOLIGER →</a>
+                <a href="#kontakt" class="btn btn-outline">KONTAKT</a>
+            </div>
+        </div>
+        <div class="hero-img">
+            <img src="images/exterior-aerial-01.jpg" alt="FoldbyHuse">
+        </div>
+    </section>
+
+    <section id="boliger">
+        <div class="inner">
+            <div class="tag">01 / BOLIGER</div>
+            <h2 class="title">Oversigt</h2>
+            <p class="desc">16 enheder. Alle udlejet. Gammelager, 8382 Foldby.</p>
+            <div class="units-grid" id="housesGrid"></div>
+        </div>
+    </section>
+
+    <section id="galleri" style="background: var(--light-gray);">
+        <div class="inner">
+            <div class="tag">02 / GALLERI</div>
+            <h2 class="title">Billeder</h2>
+            <p class="desc">Dokumentation af boligerne.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openPhoto(0)"><img src="images/exterior-aerial-01.jpg" alt="Luftfoto"><span class="label">LUFTFOTO</span></div>
+                <div class="gallery-item" onclick="openPhoto(1)"><img src="images/exterior-front-01.jpg" alt="Facade"><span class="label">FACADE</span></div>
+                <div class="gallery-item" onclick="openPhoto(2)"><img src="images/living-room-01.jpg" alt="Stue"><span class="label">STUE</span></div>
+                <div class="gallery-item" onclick="openPhoto(3)"><img src="images/kitchen-01.jpg" alt="Køkken"><span class="label">KØKKEN</span></div>
+                <div class="gallery-item" onclick="openPhoto(4)"><img src="images/bedroom-master-01.jpg" alt="Soveværelse"><span class="label">SOVEVÆRELSE</span></div>
+                <div class="gallery-item" onclick="openPhoto(5)"><img src="images/bathroom-01.jpg" alt="Badeværelse"><span class="label">BADEVÆRELSE</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="om">
+        <div class="inner">
+            <div class="tag">03 / FORDELE</div>
+            <h2 class="title">Hvorfor Os?</h2>
+            <p class="desc">Fire grunde til at vælge FoldbyHuse.</p>
+            <div class="features-grid">
+                <div class="feature"><div class="num">01</div><h3>Pris</h3><p>Aarhus' laveste priser for nybyggeri.</p></div>
+                <div class="feature"><div class="num">02</div><h3>Kvalitet</h3><p>Moderne materialer. Energirigtigt.</p></div>
+                <div class="feature"><div class="num">03</div><h3>Beliggenhed</h3><p>Landlig idyl. Tæt på Aarhus.</p></div>
+                <div class="feature"><div class="num">04</div><h3>Erfaring</h3><p>16 huse siden 2015.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="kontakt">
+        <div class="inner">
+            <div class="tag" style="background:var(--yellow);color:var(--black);">04 / KONTAKT</div>
+            <h2 class="title" style="color:var(--white);">Skriv Til Os</h2>
+            <p class="desc">Kom på ventelisten.</p>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item"><div class="ico">T</div><div><a href="tel:21468065">21 46 80 65</a><br><small>Hverdage 9-17</small></div></div>
+                    <div class="contact-item"><div class="ico">E</div><div><a href="mailto:info@foldbyhuse.dk">info@foldbyhuse.dk</a></div></div>
+                    <div class="contact-item"><div class="ico">A</div><div>Gammelager, Foldby, 8382</div></div>
+                </div>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group"><label>Navn</label><input type="text" placeholder="DIT NAVN" required></div>
+                        <div class="form-group"><label>Telefon</label><input type="tel" placeholder="DIT NUMMER" required></div>
+                    </div>
+                    <div class="form-group"><label>Email</label><input type="email" placeholder="DIN@EMAIL.DK" required></div>
+                    <div class="form-group"><label>Besked</label><textarea rows="4" placeholder="JEG ER INTERESSERET I..."></textarea></div>
+                    <button type="submit" class="submit-btn" id="submitBtn">SEND BESKED</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer><p>&copy; 2026 FOLDBYHUSE. ALLE RETTIGHEDER FORBEHOLDES.</p></footer>
+
+    <div class="modal" id="unitModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeUnitModal()">&times;</button>
+            <div class="modal-title" id="modalTitle">HUS 1</div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <div class="photo-modal" id="photoModal">
+        <button class="photo-modal-close" onclick="closePhotoModal()">&times;</button>
+        <button class="photo-modal-nav photo-prev" onclick="changePhoto(-1)">&#8249;</button>
+        <img id="modalPhoto" src="" alt="">
+        <button class="photo-modal-nav photo-next" onclick="changePhoto(1)">&#8250;</button>
+        <div class="photo-counter" id="photoCounter"></div>
+    </div>
+
+    <div class="toast" id="toast"><span>&#10003;</span><span>BESKEDEN ER SENDT!</span></div>
+
+    <script>
+        const units = Array.from({length:16},(_,i)=>({id:i+1,status:'rented',type:'Rækkehus',size:'105 m²'}));
+        const photos = [
+            {src:'images/exterior-aerial-01.jpg',title:'Luftfoto'},
+            {src:'images/exterior-front-01.jpg',title:'Facade'},
+            {src:'images/living-room-01.jpg',title:'Stue'},
+            {src:'images/kitchen-01.jpg',title:'Køkken'},
+            {src:'images/bedroom-master-01.jpg',title:'Soveværelse'},
+            {src:'images/bathroom-01.jpg',title:'Badeværelse'}
+        ];
+        let currentPhoto = 0;
+
+        function renderUnits() {
+            document.getElementById('housesGrid').innerHTML = units.map(u => `
+                <div class="unit-card" onclick="openUnitModal(${u.id})">
+                    <div class="num">${u.id}</div>
+                    <div class="addr">Gammelager ${u.id}</div>
+                    <div class="status">UDLEJET</div>
+                </div>
+            `).join('');
+        }
+
+        function openUnitModal(id) {
+            const u = units.find(x=>x.id===id);
+            document.getElementById('modalTitle').textContent = `HUS ${u.id}`;
+            document.getElementById('modalBody').innerHTML = `
+                <div class="modal-row"><span>TYPE</span><span>${u.type}</span></div>
+                <div class="modal-row"><span>STØRRELSE</span><span>${u.size}</span></div>
+                <div class="modal-row"><span>STATUS</span><span style="color:var(--red)">UDLEJET</span></div>
+                <div class="modal-row"><span>ADRESSE</span><span>Gammelager ${u.id}</span></div>
+                <p style="margin-top:1rem;color:var(--gray);text-align:center;font-size:0.85rem;">Denne bolig er udlejet. Kontakt os for venteliste.</p>
+            `;
+            document.getElementById('unitModal').classList.add('active');
+        }
+        function closeUnitModal() { document.getElementById('unitModal').classList.remove('active'); }
+
+        function openPhoto(i) {
+            currentPhoto = i;
+            document.getElementById('modalPhoto').src = photos[i].src;
+            document.getElementById('photoCounter').textContent = `${i+1} / ${photos.length}`;
+            document.getElementById('photoModal').classList.add('active');
+        }
+        function closePhotoModal() { document.getElementById('photoModal').classList.remove('active'); }
+        function changePhoto(d) {
+            currentPhoto = (currentPhoto + d + photos.length) % photos.length;
+            document.getElementById('modalPhoto').src = photos[currentPhoto].src;
+            document.getElementById('photoCounter').textContent = `${currentPhoto+1} / ${photos.length}`;
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.textContent = 'SENDER...'; btn.disabled = true;
+            setTimeout(()=>{
+                btn.textContent = 'SEND BESKED'; btn.disabled = false;
+                e.target.reset();
+                document.getElementById('toast').classList.add('show');
+                setTimeout(()=>document.getElementById('toast').classList.remove('show'), 3000);
+            }, 1500);
+        }
+
+        document.getElementById('unitModal').addEventListener('click', function(e){ if(e.target===this) closeUnitModal(); });
+        document.getElementById('photoModal').addEventListener('click', function(e){ if(e.target===this) closePhotoModal(); });
+        document.addEventListener('keydown', e=>{
+            if(!document.getElementById('photoModal').classList.contains('active')) return;
+            if(e.key==='Escape') closePhotoModal();
+            if(e.key==='ArrowLeft') changePhoto(-1);
+            if(e.key==='ArrowRight') changePhoto(1);
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{
+            a.addEventListener('click', function(e){
+                e.preventDefault();
+                const t = document.querySelector(this.getAttribute('href'));
+                if(t) t.scrollIntoView({behavior:'smooth'});
+            });
+        });
+
+        renderUnits();
+    </script>
+</body>
+</html>
