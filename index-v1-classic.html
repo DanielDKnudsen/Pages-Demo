@@ -14,42 +14,6 @@
     <meta property="og:image" content="images/exterior-aerial-01.jpg">
     <meta property="og:url" content="https://foldbyhuse.dk">
     
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://foldbyhuse.dk/">
-    
-    <!-- Structured Data (Schema.org) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "RealEstateAgent",
-      "name": "FoldbyHuse",
-      "description": "16 moderne rækkehuse på Gammelager i Foldby",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Gammelager",
-        "addressLocality": "Foldby",
-        "postalCode": "8382",
-        "addressCountry": "DK"
-      },
-      "telephone": "+45 21 46 80 65",
-      "email": "info@foldbyhuse.dk",
-      "url": "https://foldbyhuse.dk",
-      "containedInPlace": {
-        "@type": "Residence",
-        "numberOfRooms": 16,
-        "floorSize": {
-          "@type": "QuantitativeValue",
-          "value": 105,
-          "unitCode": "MTK"
-        }
-      }
-    }
-    </script>
-    
-    <!-- Preload critical images -->
-    <link rel="preload" as="image" href="images/exterior-aerial-01.jpg">
-    <link rel="preload" as="image" href="images/exterior-front-01.jpg">
-    
     <title>FoldbyHuse — Moderne Rækkehuse</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -108,12 +72,12 @@
             <h2 class="title">Se Vores Boliger</h2>
             <p class="desc">Billeder fra de moderne rækkehuse i Foldby.</p>
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openPhoto(0)"><img src="images/exterior-aerial-01.jpg" alt="Luftfoto" loading="lazy"><div class="cap"><strong>Luftfoto</strong><small>Oversigt over boligerne</small></div></div>
-                <div class="gallery-item" onclick="openPhoto(1)"><img src="images/exterior-front-01.jpg" alt="Facade" loading="lazy"><div class="cap"><strong>Facade</strong><small>Røde mursten</small></div></div>
-                <div class="gallery-item" onclick="openPhoto(2)"><img src="images/living-room-01.jpg" alt="Stue" loading="lazy"><div class="cap"><strong>Stue</strong><small>Rummelig og lys</small></div></div>
-                <div class="gallery-item" onclick="openPhoto(3)"><img src="images/kitchen-01.jpg" alt="Køkken" loading="lazy"><div class="cap"><strong>Køkken</strong><small>Moderne design</small></div></div>
-                <div class="gallery-item" onclick="openPhoto(4)"><img src="images/bedroom-master-01.jpg" alt="Soveværelse" loading="lazy"><div class="cap"><strong>Soveværelse</strong><small>Lyst og rummeligt</small></div></div>
-                <div class="gallery-item" onclick="openPhoto(5)"><img src="images/bathroom-01.jpg" alt="Badeværelse" loading="lazy"><div class="cap"><strong>Badeværelse</strong><small>Med gulvvarme</small></div></div>
+                <div class="gallery-item" onclick="openPhoto(0)"><img src="images/exterior-aerial-01.jpg" alt="Luftfoto"><div class="cap"><strong>Luftfoto</strong><small>Oversigt over boligerne</small></div></div>
+                <div class="gallery-item" onclick="openPhoto(1)"><img src="images/exterior-front-01.jpg" alt="Facade"><div class="cap"><strong>Facade</strong><small>Røde mursten</small></div></div>
+                <div class="gallery-item" onclick="openPhoto(2)"><img src="images/living-room-01.jpg" alt="Stue"><div class="cap"><strong>Stue</strong><small>Rummelig og lys</small></div></div>
+                <div class="gallery-item" onclick="openPhoto(3)"><img src="images/kitchen-01.jpg" alt="Køkken"><div class="cap"><strong>Køkken</strong><small>Moderne design</small></div></div>
+                <div class="gallery-item" onclick="openPhoto(4)"><img src="images/bedroom-master-01.jpg" alt="Soveværelse"><div class="cap"><strong>Soveværelse</strong><small>Lyst og rummeligt</small></div></div>
+                <div class="gallery-item" onclick="openPhoto(5)"><img src="images/bathroom-01.jpg" alt="Badeværelse"><div class="cap"><strong>Badeværelse</strong><small>Med gulvvarme</small></div></div>
             </div>
         </div>
     </section>
@@ -160,17 +124,17 @@
 
     <div class="modal" id="unitModal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeUnitModal()" aria-label="Luk modal">&times;</button>
+            <button class="modal-close" onclick="closeUnitModal()">&times;</button>
             <div class="modal-title" id="modalTitle">Hus 1</div>
             <div id="modalBody"></div>
         </div>
     </div>
 
     <div class="photo-modal" id="photoModal">
-        <button class="photo-modal-close" onclick="closePhotoModal()" aria-label="Luk billede">&times;</button>
-        <button class="photo-modal-nav photo-prev" onclick="changePhoto(-1)" aria-label="Forrige billede">&#8249;</button>
+        <button class="photo-modal-close" onclick="closePhotoModal()">&times;</button>
+        <button class="photo-modal-nav photo-prev" onclick="changePhoto(-1)">&#8249;</button>
         <img id="modalPhoto" src="" alt="">
-        <button class="photo-modal-nav photo-next" onclick="changePhoto(1)" aria-label="Næste billede">&#8250;</button>
+        <button class="photo-modal-nav photo-next" onclick="changePhoto(1)">&#8250;</button>
         <div class="photo-counter" id="photoCounter"></div>
     </div>
 

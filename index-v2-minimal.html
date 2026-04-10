@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="16 moderne rækkehuse på Gammelager i Foldby. Bygget med omhu, tæt på naturen og kun minutter fra Aarhus centrum.">
+    <meta name="keywords" content="FoldbyHuse, rækkehuse, Foldby, Aarhus, boliger, ejendom">
+    <meta name="author" content="FoldbyHuse">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FoldbyHuse — Moderne Rækkehuse (V2 Minimal)">
+    <meta property="og:description" content="16 moderne rækkehuse på Gammelager i Foldby. Kvalitetsbyggeri til Aarhus' laveste pris.">
+    <meta property="og:image" content="images/exterior-aerial-01.jpg">
+    <meta property="og:url" content="https://foldbyhuse.dk">
+    
+    <title>FoldbyHuse — V2 Minimal</title>
+    <link rel="stylesheet" href="css/styles-v2-minimal.css">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo"><div class="logo-mark">F</div>FoldbyHuse</a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="#hjem">Hjem</a></li>
+                <li><a href="#boliger">Boliger</a></li>
+                <li><a href="#galleri">Galleri</a></li>
+                <li><a href="#om">Om</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="hjem">
+        <h1>FoldbyHuse</h1>
+        <p>16 moderne rækkehuse i naturskønne Foldby — kun 15 minutter fra Aarhus C.</p>
+    </section>
+
+    <section id="boliger">
+        <h2 class="title">Vores Boliger</h2>
+        <p class="desc">16 identiske rækkehuse med hvert sit unikke udtryk.</p>
+        <div class="houses-grid" id="housesGrid"></div>
+    </section>
+
+    <section id="galleri">
+        <h2 class="title">Se Vores Boliger</h2>
+        <p class="desc">Billeder fra de moderne rækkehuse i Foldby.</p>
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openPhoto(0)"><img src="images/exterior-aerial-01.jpg" alt="Luftfoto" loading="lazy"><div class="cap"><strong>Luftfoto</strong><small>Oversigt over boligerne</small></div></div>
+            <div class="gallery-item" onclick="openPhoto(1)"><img src="images/exterior-front-01.jpg" alt="Facade" loading="lazy"><div class="cap"><strong>Facade</strong><small>Røde mursten</small></div></div>
+            <div class="gallery-item" onclick="openPhoto(2)"><img src="images/living-room-01.jpg" alt="Stue" loading="lazy"><div class="cap"><strong>Stue</strong><small>Rummelig og lys</small></div></div>
+            <div class="gallery-item" onclick="openPhoto(3)"><img src="images/kitchen-01.jpg" alt="Køkken" loading="lazy"><div class="cap"><strong>Køkken</strong><small>Moderne design</small></div></div>
+            <div class="gallery-item" onclick="openPhoto(4)"><img src="images/bedroom-master-01.jpg" alt="Soveværelse" loading="lazy"><div class="cap"><strong>Soveværelse</strong><small>Lyst og rummeligt</small></div></div>
+            <div class="gallery-item" onclick="openPhoto(5)"><img src="images/bathroom-01.jpg" alt="Badeværelse" loading="lazy"><div class="cap"><strong>Badeværelse</strong><small>Med gulvvarme</small></div></div>
+        </div>
+    </section>
+
+    <section id="om">
+        <h2 class="title">Om FoldbyHuse</h2>
+        <p class="desc">Et bæredygtigt boligprojekt i hjertet af Foldby.</p>
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">🌿</div>
+                <h3>Bæredygtighed</h3>
+                <p>Energieffektive boliger med fokus på miljøet</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🏡</div>
+                <h3>Fællesskab</h3>
+                <p>Grønne fællesarealer til alle beboere</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📍</div>
+                <h3>Beliggenhed</h3>
+                <p>Natur tæt på og kun 15 min til Aarhus</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt">
+        <h2 class="title">Kontakt Os</h2>
+        <p class="desc">Har du spørgsmål? Vi svarer gerne.</p>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">Navn *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Telefon</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="message">Besked *</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn" id="submitBtn">Send Besked</button>
+        </form>
+    </section>
+
+    <div class="modal" id="unitModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeUnitModal()" aria-label="Luk modal">&times;</button>
+            <div class="modal-title" id="modalTitle">Hus 1</div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <div class="photo-modal" id="photoModal">
+        <button class="photo-modal-close" onclick="closePhotoModal()" aria-label="Luk billede">&times;</button>
+        <button class="photo-modal-nav photo-prev" onclick="changePhoto(-1)" aria-label="Forrige billede">&#8249;</button>
+        <img id="modalPhoto" src="" alt="">
+        <button class="photo-modal-nav photo-next" onclick="changePhoto(1)" aria-label="Næste billede">&#8250;</button>
+        <div class="photo-counter" id="photoCounter"></div>
+    </div>
+
+    <div class="toast" id="toast"><span>&#10003;</span><span>Beskeden er sendt!</span></div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 FoldbyHuse. Alle rettigheder forbeholdes.</p>
+            <p>Gammelager, 8382 Foldby | Tlf: +45 21 46 80 65 | Email: info@foldbyhuse.dk</p>
+        </div>
+    </footer>
+
+    <script src="js/main-v2-minimal.js"></script>
+</body>
+</html>

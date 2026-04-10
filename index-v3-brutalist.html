@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="16 moderne rækkehuse på Gammelager i Foldby.">
+    <title>FoldbyHuse — V3 Brutalist</title>
+    <link rel="stylesheet" href="css/styles-v3-brutalist.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">FOLD<span class="accent">BY</span>HUSE</a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="#hjem">HJEM</a></li>
+                <li><a href="#boliger">BOLIGER</a></li>
+                <li><a href="#galleri">GALLERI</a></li>
+                <li><a href="#kontakt">KONTAKT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="hjem">
+        <h1><span class="outline">FOLDBY</span>HUSE</h1>
+        <p class="hero-text">16 RÆKKEHUSE<br/>FOLDBY<br/>DANMARK</p>
+    </section>
+
+    <section id="boliger">
+        <h2 class="title">[ BOLIGER ]</h2>
+        <div class="houses-grid" id="housesGrid"></div>
+    </section>
+
+    <section id="galleri">
+        <h2 class="title">[ GALLERI ]</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openPhoto(0)"><img src="images/exterior-aerial-01.jpg" alt="Luftfoto" loading="lazy"></div>
+            <div class="gallery-item" onclick="openPhoto(1)"><img src="images/exterior-front-01.jpg" alt="Facade" loading="lazy"></div>
+            <div class="gallery-item" onclick="openPhoto(2)"><img src="images/living-room-01.jpg" alt="Stue" loading="lazy"></div>
+            <div class="gallery-item" onclick="openPhoto(3)"><img src="images/kitchen-01.jpg" alt="Køkken" loading="lazy"></div>
+            <div class="gallery-item" onclick="openPhoto(4)"><img src="images/bedroom-master-01.jpg" alt="Soveværelse" loading="lazy"></div>
+            <div class="gallery-item" onclick="openPhoto(5)"><img src="images/bathroom-01.jpg" alt="Badeværelse" loading="lazy"></div>
+        </div>
+    </section>
+
+    <section id="kontakt">
+        <h2 class="title">[ KONTAKT ]</h2>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group"><input type="text" placeholder="NAVN *" required></div>
+            <div class="form-group"><input type="email" placeholder="EMAIL *" required></div>
+            <div class="form-group"><textarea placeholder="BESKED *" required></textarea></div>
+            <button type="submit" class="btn">SEND →</button>
+        </form>
+    </section>
+
+    <div class="modal" id="unitModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeUnitModal()" aria-label="Luk">&times;</button>
+            <div class="modal-title" id="modalTitle"></div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <div class="photo-modal" id="photoModal">
+        <button class="photo-modal-close" onclick="closePhotoModal()" aria-label="Luk">&times;</button>
+        <button class="photo-modal-nav photo-prev" onclick="changePhoto(-1)" aria-label="Forrige">&#8249;</button>
+        <img id="modalPhoto" src="" alt="">
+        <button class="photo-modal-nav photo-next" onclick="changePhoto(1)" aria-label="Næste">&#8250;</button>
+    </div>
+
+    <div class="toast" id="toast">✓ SENDT!</div>
+
+    <footer><p>© 2024 FOLDBYHUSE</p></footer>
+    <script src="js/main-v3-brutalist.js"></script>
+</body>
+</html>
