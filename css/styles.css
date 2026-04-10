@@ -100,6 +100,34 @@ nav {
     color: var(--accent2);
 }
 
+/* Version Switcher */
+.version-switcher select {
+    background: var(--glass);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    outline: none;
+}
+
+.version-switcher select:hover {
+    border-color: var(--accent);
+    background: rgba(108,92,231,0.1);
+}
+
+.version-switcher select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--glow);
+}
+
+.version-switcher select option {
+    background: var(--bg);
+    color: var(--text);
+}
+
 /* Mobile Navigation */
 .mobile-menu-btn {
     display: none;
@@ -837,6 +865,11 @@ footer {
     
     .nav-links li:last-child {
         border-bottom: none;
+    }
+    
+    .version-switcher select {
+        width: 100%;
+        margin-top: 0.5rem;
     }
     
     .gallery-grid {

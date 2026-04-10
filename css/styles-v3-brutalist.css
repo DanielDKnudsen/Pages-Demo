@@ -53,6 +53,28 @@ nav {
 }
 .nav-links a:hover { text-decoration: underline; }
 
+.version-switcher select {
+    background: transparent;
+    border: var(--border);
+    color: var(--text);
+    padding: 0.5rem 1rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.version-switcher select:hover {
+    background: var(--text);
+    color: #000;
+}
+
+.version-switcher select:focus {
+    outline: 3px solid var(--text);
+    outline-offset: 2px;
+}
+
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -289,4 +311,9 @@ footer p { font-weight: 700; }
         border-bottom: var(--border);
     }
     .nav-links.active { display: flex; }
+    
+    .version-switcher select {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
 }
