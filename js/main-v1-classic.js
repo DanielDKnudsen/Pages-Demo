@@ -34,7 +34,7 @@ function renderUnits() {
     `).join('');
 }
 
-// Open unit modal with focus trap
+// Open unit modal
 function openUnitModal(id) {
     const u = units.find(x => x.id === id);
     if (!u) return;
@@ -47,75 +47,22 @@ function openUnitModal(id) {
         <div class="modal-row"><span class="label">Adresse</span><span class="value">Gammelager ${u.id}</span></div>
         <p style="margin-top:1rem;color:var(--text-dim);text-align:center;font-size:0.85rem;">Denne bolig er udlejet. Kontakt os for venteliste.</p>
     `;
-    const modal = document.getElementById('unitModal');
-    modal.classList.add('active');
+    document.getElementById('unitModal').classList.add('active');
     document.body.style.overflow = 'hidden';
-    
-    // Focus trap setup
-    const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-    const firstFocusable = focusableElements[0];
-    const lastFocusable = focusableElements[focusableElements.length - 1];
-    
-    firstFocusable.focus();
-    
-    function trapFocus(e) {
-        if (e.key !== 'Tab') return;
-        
-        if (e.shiftKey && document.activeElement === firstFocusable) {
-            e.preventDefault();
-            lastFocusable.focus();
-        } else if (!e.shiftKey && document.activeElement === lastFocusable) {
-            e.preventDefault();
-            firstFocusable.focus();
-        }
-    }
-    
-    modal.addEventListener('keydown', trapFocus);
-    modal.trapFocusHandler = trapFocus;
 }
 
 // Close unit modal
 function closeUnitModal() {
-    const modal = document.getElementById('unitModal');
-    modal.classList.remove('active');
+    document.getElementById('unitModal').classList.remove('active');
     document.body.style.overflow = '';
-    
-    // Remove focus trap handler
-    if (modal.trapFocusHandler) {
-        modal.removeEventListener('keydown', modal.trapFocusHandler);
-        modal.trapFocusHandler = null;
-    }
 }
 
-// Open photo modal with focus trap
+// Open photo modal
 function openPhoto(i) {
     currentPhoto = i;
     updatePhotoModal();
-    const modal = document.getElementById('photoModal');
-    modal.classList.add('active');
+    document.getElementById('photoModal').classList.add('active');
     document.body.style.overflow = 'hidden';
-    
-    // Focus trap setup for photo modal
-    const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-    const firstFocusable = focusableElements[0];
-    const lastFocusable = focusableElements[focusableElements.length - 1];
-    
-    firstFocusable.focus();
-    
-    function trapFocus(e) {
-        if (e.key !== 'Tab') return;
-        
-        if (e.shiftKey && document.activeElement === firstFocusable) {
-            e.preventDefault();
-            lastFocusable.focus();
-        } else if (!e.shiftKey && document.activeElement === lastFocusable) {
-            e.preventDefault();
-            firstFocusable.focus();
-        }
-    }
-    
-    modal.addEventListener('keydown', trapFocus);
-    modal.trapFocusHandler = trapFocus;
 }
 
 // Update photo modal content
@@ -127,15 +74,8 @@ function updatePhotoModal() {
 
 // Close photo modal
 function closePhotoModal() {
-    const modal = document.getElementById('photoModal');
-    modal.classList.remove('active');
+    document.getElementById('photoModal').classList.remove('active');
     document.body.style.overflow = '';
-    
-    // Remove focus trap handler
-    if (modal.trapFocusHandler) {
-        modal.removeEventListener('keydown', modal.trapFocusHandler);
-        modal.trapFocusHandler = null;
-    }
 }
 
 // Navigate photos
