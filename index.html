@@ -52,6 +52,7 @@
     
     <title>FoldbyHuse — Moderne Rækkehuse</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/themes.css">
 </head>
 <body>
 
@@ -65,14 +66,7 @@
                 <li><a href="#galleri">Galleri</a></li>
                 <li><a href="#om">Om</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
-                <li class="version-switcher">
-                    <select onchange="window.location.href=this.value" aria-label="Vælg design version">
-                        <option value="index.html" selected>Classic (Default)</option>
-                        <option value="index-v1-classic.html">V1 Classic</option>
-                        <option value="index-v2-minimal.html">V2 Minimal</option>
-                        <option value="index-v3-brutalist.html">V3 Brutalist</option>
-                    </select>
-                </li>
+                <!-- Version switcher will be injected by theme-switcher.js -->
             </ul>
         </div>
     </nav>
@@ -185,5 +179,6 @@
     <div class="toast" id="toast"><span>&#10003;</span><span>Beskeden er sendt!</span></div>
 
     <script src="js/main.js"></script>
+    <script src="js/theme-switcher.js"></script>
 </body>
 </html>

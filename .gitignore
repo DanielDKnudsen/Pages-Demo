@@ -1,1 +1,8 @@
-(css/styles-v1-classic.css, css/styles-v2-minimal.css, css/styles-v3-brutalist.css, css/styles.css, index-v1-classic.html, index-v2-minimal.html, index-v3-brutalist.html, index.html)
+# Examples
+
+THEMES_GUIDE.md
+css/themes.css
+js/theme-switcher.js
+index-v2-minimal.html
+index-v3-brutalist.html
+index.html
