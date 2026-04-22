@@ -1,0 +1,36 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "small_model": "ollama",
+    "plugin": [],
+    "provider": {
+        "ollama": {
+            "npm": "@ai-sdk/openai-compatible",
+            "name": "Local llama-server",
+            "options": {
+                "baseURL": "http://127.0.0.1:8080/v1",
+                "apiKey": "sk-local-dummy-key"
+            },
+            "models": {
+                "ollama": {
+                    "id": "local-model",
+                    "name": "Local Qwen3.6 27b",
+                    "modalities": {
+                        "input": [
+                            "text",
+                            "image"
+                        ],
+                        "output": [
+                            "text"
+                        ]
+                    },
+                    "limit": {
+                        "context": 45000,
+                        "output": 8192
+                    },
+                    "temperature": true,
+                    "tool_call": true
+                }
+            }
+        }
+    }
+}

@@ -718,6 +718,63 @@ section {
     color: var(--text-dim);
 }
 
+/* Omraadet Section */
+.omraadet-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.omraadet-card {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.omraadet-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.omraadet-card:hover {
+    border-color: rgba(0,245,212,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,245,212,0.1);
+}
+
+.omraadet-card:hover::before {
+    opacity: 1;
+}
+
+.omraadet-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.omraadet-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.omraadet-card p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
 /* Contact Section */
 .contact-section {
     background: var(--bg2);
@@ -1067,6 +1124,10 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .omraadet-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .contact-grid {
         grid-template-columns: 1fr;
     }
@@ -1113,6 +1174,10 @@ footer {
     }
 
     .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .omraadet-grid {
         grid-template-columns: 1fr;
     }
 

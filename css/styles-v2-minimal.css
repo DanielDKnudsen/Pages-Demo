@@ -269,6 +269,43 @@ section {
     color: var(--text-dim);
 }
 
+/* Omraadet Section */
+.omraadet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.omraadet-card {
+    text-align: center;
+    padding: 1.5rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.omraadet-card:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+.omraadet-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.omraadet-card h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.omraadet-card p {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
 .contact-form {
     max-width: 500px;
     margin: 0 auto;
@@ -521,5 +558,9 @@ footer {
     
     section {
         padding: 3rem 1.5rem;
+    }
+    
+    .omraadet-grid {
+        grid-template-columns: 1fr;
     }
 }

@@ -173,6 +173,43 @@ section {
 
 .gallery-item:hover img { filter: grayscale(0%); }
 
+/* Omraadet Section */
+.omraadet-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.omraadet-card {
+    background: var(--bg);
+    border: var(--border);
+    padding: 2rem;
+    transition: all 0.1s;
+}
+
+.omraadet-card:hover {
+    background: var(--accent);
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--text);
+}
+
+.omraadet-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.omraadet-card h3 {
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.omraadet-card p {
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
 .contact-form { max-width: 600px; }
 .form-group { margin-bottom: 1rem; }
 .form-group input, .form-group textarea {
@@ -315,5 +352,9 @@ footer p { font-weight: 700; }
     .version-switcher select {
         width: 100%;
         margin-top: 0.5rem;
+    }
+    
+    .omraadet-grid {
+        grid-template-columns: 1fr;
     }
 }
