@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="16 moderne rækkehuse på Gammelager i Foldby. Bygget med omhu, tæt på naturen og kun minutter fra Aarhus centrum.">
+    <meta name="keywords" content="FoldbyHuse, rækkehuse, Foldby, Aarhus, boliger, ejendom">
+    <meta name="author" content="FoldbyHuse">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FoldbyHuse — Moderne Rækkehuse">
+    <meta property="og:description" content="16 moderne rækkehuse på Gammelager i Foldby. Kvalitetsbyggeri til Aarhus' laveste pris.">
+    <meta property="og:image" content="images/exterior-aerial-01.jpg">
+    <meta property="og:url" content="https://foldbyhuse.dk">
+    
+    <title>FoldbyHuse — Moderne Rækkehuse</title>
+    <link rel="stylesheet" href="css/styles-v4-futuristic.css">
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">
+                <div class="logo-hex"><span>F</span></div>
+                <span class="logo-text">Foldby<span class="accent">Huse</span></span>
+            </a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#hjem">Hjem</a></li>
+                <li><a href="#boliger">Boliger</a></li>
+                <li><a href="#galleri">Galleri</a></li>
+                <li><a href="#om">Om</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+                <li class="version-switcher">
+                    <select onchange="window.location.href=this.value" aria-label="Vælg design version">
+                        <option value="index.html">Classic (Default)</option>
+                        <option value="index-v1-classic.html">V1 Classic</option>
+                        <option value="index-v2-minimal.html">V2 Minimal</option>
+                        <option value="index-v3-brutalist.html">V3 Brutalist</option>
+                        <option value="index-v4-futuristic.html" selected>V4 Futuristic</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="hjem">
+        <div class="hero-content">
+            <div class="hero-pill">
+                <span class="pill-dot"></span>
+                Premium Boliger i Foldby
+            </div>
+            <h1>
+                <span class="line">Kvalitetsbyggeri</span>
+                <span class="line">til <span class="gradient-text">Aarhus'</span></span>
+                <span class="line">laveste pris</span>
+            </h1>
+            <p>16 moderne rækkehuse på Gammelager i Foldby. Bygget med omhu, tæt på naturen og kun minutter fra Aarhus centrum.</p>
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-number">16</div>
+                    <div class="stat-label">Boliger</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">105m²</div>
+                    <div class="stat-label">Per bolig</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2015</div>
+                    <div class="stat-label">Grundlagt</div>
+                </div>
+            </div>
+            <div class="hero-actions">
+                <a href="#boliger" class="btn btn-glow">Se Boliger <span class="btn-arrow">→</span></a>
+                <a href="#kontakt" class="btn btn-outline">Kontakt Os</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="image-frame">
+                <img src="images/exterior-aerial-01.jpg" alt="FoldbyHuse">
+                <div class="frame-overlay"></div>
+            </div>
+            <div class="floating-card">
+                <div class="card-icon">◎</div>
+                <div>
+                    <strong>Foldby, Danmark</strong>
+                    <small>Nær Aarhus</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="boliger">
+        <div class="inner">
+            <div class="section-tag">Oversigt</div>
+            <h2 class="section-title">Vores Boliger</h2>
+            <p class="section-desc">Alle 16 boliger er beliggende på Gammelager, 8382 Foldby.</p>
+            <div class="units-grid" id="housesGrid"></div>
+        </div>
+    </section>
+
+    <section id="galleri">
+        <div class="inner">
+            <div class="section-tag">Galleri</div>
+            <h2 class="section-title">Se Vores Boliger</h2>
+            <p class="section-desc">Billeder fra de moderne rækkehuse i Foldby.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item large" onclick="openPhoto(0)">
+                    <img src="images/exterior-aerial-01.jpg" alt="Luftfoto">
+                    <div class="cap"><strong>Luftfoto</strong><small>Oversigt over boligerne</small></div>
+                </div>
+                <div class="gallery-item" onclick="openPhoto(1)">
+                    <img src="images/exterior-front-01.jpg" alt="Facade">
+                    <div class="cap"><strong>Facade</strong><small>Røde mursten</small></div>
+                </div>
+                <div class="gallery-item" onclick="openPhoto(2)">
+                    <img src="images/living-room-01.jpg" alt="Stue">
+                    <div class="cap"><strong>Stue</strong><small>Rummelig og lys</small></div>
+                </div>
+                <div class="gallery-item" onclick="openPhoto(3)">
+                    <img src="images/kitchen-01.jpg" alt="Køkken">
+                    <div class="cap"><strong>Køkken</strong><small>Moderne design</small></div>
+                </div>
+                <div class="gallery-item" onclick="openPhoto(4)">
+                    <img src="images/bedroom-master-01.jpg" alt="Soveværelse">
+                    <div class="cap"><strong>Soveværelse</strong><small>Lyst og rummeligt</small></div>
+                </div>
+                <div class="gallery-item" onclick="openPhoto(5)">
+                    <img src="images/bathroom-01.jpg" alt="Badeværelse">
+                    <div class="cap"><strong>Badeværelse</strong><small>Med gulvvarme</small></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="om">
+        <div class="inner">
+            <div class="section-tag">Fordele</div>
+            <h2 class="section-title">Hvorfor Vælge Os?</h2>
+            <p class="section-desc">Kvalitet og pris i perfekt balance.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">★</div>
+                    <h3>Attraktiv Pris</h3>
+                    <p>Aarhus' laveste priser for nybyggeri af denne kvalitet.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">◆</div>
+                    <h3>Kvalitetsbyggeri</h3>
+                    <p>Moderne materialer og energirigtige løsninger.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">●</div>
+                    <h3>God Beliggenhed</h3>
+                    <p>Landlig idyl med kort afstand til Aarhus centrum.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">■</div>
+                    <h3>Erfaring</h3>
+                    <p>16 huse færdigbygget siden 2015.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="kontakt">
+        <div class="inner">
+            <div class="section-tag">Kontakt</div>
+            <h2 class="section-title">Skriv Til Os</h2>
+            <p class="section-desc">Interesseret i en bolig? Vi hjælper gerne.</p>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">☎</div>
+                        <div>
+                            <a href="tel:21468065">21 46 80 65</a>
+                            <small>Hverdage 9-17</small>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉</div>
+                        <div>
+                            <a href="mailto:info@foldbyhuse.dk">info@foldbyhuse.dk</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">◎</div>
+                        <div>Gammelager, Foldby, 8382</div>
+                    </div>
+                </div>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Navn</label>
+                            <input type="text" placeholder="Dit navn" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Telefon</label>
+                            <input type="tel" placeholder="Dit nummer" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="din@email.dk" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Besked</label>
+                        <textarea rows="4" placeholder="Jeg er interesseret i..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span>Send Besked</span>
+                        <span class="btn-glow-effect"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 FoldbyHuse. Alle rettigheder forbeholdes.</p>
+    </footer>
+
+    <div class="modal" id="unitModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeUnitModal()">&times;</button>
+            <div class="modal-title" id="modalTitle">Hus 1</div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <div class="photo-modal" id="photoModal">
+        <button class="photo-modal-close" onclick="closePhotoModal()">&times;</button>
+        <button class="photo-modal-nav photo-prev" onclick="changePhoto(-1)">&#8249;</button>
+        <img id="modalPhoto" src="" alt="">
+        <button class="photo-modal-nav photo-next" onclick="changePhoto(1)">&#8250;</button>
+        <div class="photo-counter" id="photoCounter"></div>
+    </div>
+
+    <div class="toast" id="toast">
+        <span>&#10003;</span>
+        <span>Beskeden er sendt!</span>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
